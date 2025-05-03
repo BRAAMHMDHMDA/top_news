@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.8",
         "tomatophp/filament-browser": "2.0.4",
         "tomatophp/filament-language-switcher": "^1.0",
+        "tomatophp/filament-settings-hub": "v1.0.10",
         "tomatophp/filament-translations": "^2.0",
         "tomatophp/filament-users": "^2.0"
     },

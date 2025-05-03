@@ -80,6 +80,12 @@ class AdminPanelProvider extends PanelProvider
                     ->allowCode()
                     ->allowPreview()
                     ->basePath(base_path())
+            )->plugin(
+                \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
+                    ->allowShield()
+                    ->allowLocationSettings()
+                    ->allowSiteSettings()
+                    ->allowSocialMenuSettings()
             )
 
             ;
