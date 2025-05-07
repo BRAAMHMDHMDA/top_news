@@ -18,7 +18,15 @@ use Illuminate\Support\Facades\Hash;
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
+    public static function getNavigationGroup(): ?string
+    {
+        if (config('filament-users.shield')) {
+            return __('filament-shield::filament-shield.nav.group');
+        }
 
+        return config('filament-users.group') ?: trans('filament-users::user.group');
+    }
+    protected static ?int $navigationSort = 1000;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
