@@ -20,6 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       //
+        Filament::serving(function () {
+            Filament::registerNavigationGroups([
+                NavigationGroup::make('Filament Shield')         // the original group key
+                ->label('Access Control Management') // your new label
+                ->icon('heroicon-s-lock-closed'),
+                // … other groups if needed …
+            ]);
+        });
     }
 }

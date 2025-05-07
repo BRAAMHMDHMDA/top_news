@@ -1,0 +1,155 @@
+<?php
+
+namespace App\Filament\Resources\NewsResource\Pages;
+
+use App\Filament\Resources\NewsResource;
+use Filament\Resources\Pages\ViewRecord;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Actions;
+
+class ViewNews extends ViewRecord
+{
+    // Use the correct Translatable trait for ViewRecord
+    use \Filament\Resources\Pages\ViewRecord\Concerns\Translatable;
+
+    protected static string $resource = NewsResource::class;
+
+    protected static ?string $title = 'View News';
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\LocaleSwitcher::make(),
+            Actions\EditAction::make(),
+        ];
+    }
+
+    public function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make('Article')
+                    ->schema([
+                        ImageEntry::make('image_path')
+                            ->label('')
+                            ->disk('public')
+                            ->height(200)
+                            ->width('100%')
+                            ->defaultImageUrl(asset('images/fallback.jpg'))
+                            ->columnSpanFull(),
+//                            ->extraAttributes(['class' => 'rounded-lg shadow-lg mb-6 object-cover']),
+                        TextEntry::make('title')
+                            ->label('')
+                            ->formatStateUsing(fn ($state) => "<h1 class='text-3xl font-bold mb-4'>{$state}</h1>")
+                            ->html()
+                            ->columnSpanFull(),
+                        TextEntry::make('metadata')
+                            ->label('')
+                            ->getStateUsing(function ($record) {
+                                $locale = app()->getLocale();
+                                $category = $record->category ? $record->category->getTranslation('name', $locale) : 'No category';
+                                $author = $record->user ? $record->user->name : 'Unknown';
+                                $date = $record->created_at ? $record->created_at->format('M j, Y') : 'N/A';
+                                return "Posted in {$category} by {$author} on {$date}";
+                            })
+                            ->formatStateUsing(fn ($state) => "<p class='text-gray-600 italic mb-6'>{$state}</p>")
+                            ->html()
+                            ->columnSpanFull(),
+                        TextEntry::make('content')
+                            ->label('')
+                            ->markdown()
+                            ->columnSpanFull()
+                            ->extraAttributes(['class' => 'prose max-w-none text-gray-800 leading-relaxed']),
+                    ])
+                    ->extraAttributes(['class' => 'bg-white p-8 rounded-lg shadow-sm mb-6']),
+
+                Section::make('Article Metadata')
+                    ->schema([
+                        Section::make('SEO Details')
+                            ->schema([
+                                TextEntry::make('meta_title')
+                                    ->label('Meta Title')
+                                    ->color('gray'),
+                                TextEntry::make('meta_description')
+                                    ->label('Meta Description')
+                                    ->color('gray'),
+                                TextEntry::make('slug')
+                                    ->label('Slug')
+                                    ->color('gray'),
+                            ])
+                            ->columns(1)
+                            ->collapsible(),
+                        Section::make('Publication Settings')
+                            ->schema([
+                                IconEntry::make('status')
+                                    ->label('Published')
+                                    ->boolean()
+                                    ->trueIcon('heroicon-o-check-circle')
+                                    ->falseIcon('heroicon-o-x-circle')
+                                    ->trueColor('success')
+                                    ->falseColor('danger'),
+                                IconEntry::make('is_breaking_news')
+                                    ->label('Breaking News')
+                                    ->boolean()
+                                    ->trueIcon('heroicon-o-fire')
+                                    ->falseIcon('heroicon-o-x-circle')
+                                    ->trueColor('warning'),
+                                IconEntry::make('show_at_slider')
+                                    ->label('Show in Slider')
+                                    ->boolean()
+                                    ->trueIcon('heroicon-o-view-columns')
+                                    ->falseIcon('heroicon-o-x-circle'),
+                                IconEntry::make('show_at_popular')
+                                    ->label('Show in Popular')
+                                    ->boolean()
+                                    ->trueIcon('heroicon-o-star')
+                                    ->falseIcon('heroicon-o-x-circle'),
+                                IconEntry::make('is_approved')
+                                    ->label('Approved')
+                                    ->boolean()
+                                    ->trueIcon('heroicon-o-shield-check')
+                                    ->falseIcon('heroicon-o-x-circle')
+                                    ->trueColor('success'),
+                            ])
+                            ->columns(5)
+                            ->collapsible(),
+                        Section::make('Timestamps')
+                            ->schema([
+                                TextEntry::make('created_at')
+                                    ->label('Created At')
+                                    ->dateTime('M j, Y H:i')
+                                    ->default('N/A'),
+                                TextEntry::make('updated_at')
+                                    ->label('Updated At')
+                                    ->dateTime('M j, Y H:i')
+                                    ->default('N/A'),
+                            ])
+                            ->columns(2)
+                            ->collapsible(),
+
+                    ])
+                    ->columns(1)
+                    ->columnSpan(['lg' => 1])
+                    ->extraAttributes(['class' => 'bg-gray-50 p-6 rounded-lg shadow-sm']),
+            ])
+            ->columns(1);
+    }
+
+    // Listen for locale changes and refresh the page
+    public function setActiveLocale($locale)
+    {
+        $this->activeLocale = $locale;
+        app()->setLocale($locale);
+        $this->refreshForm();
+    }
+
+    // Ensure the form refreshes when locale changes
+    protected function refreshForm()
+    {
+        $this->fillForm();
+    }
+}
