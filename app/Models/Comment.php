@@ -3,46 +3,35 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
-/**
- * @property integer $id
- * @property integer $news_id
- * @property integer $customer_id
- * @property integer $parent_id
- * @property string $comment
- * @property string $created_at
- * @property string $updated_at
- * @property Customer $customer
- * @property News $news
- * @property Comment $comment
- */
 class Comment extends Model
 {
-    /**
-     * @var array
-     */
-    protected $fillable = ['news_id', 'customer_id', 'parent_id', 'comment', 'created_at', 'updated_at'];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function customer()
+    protected $fillable = ['news_id', 'parent_id', 'comment', 'status'];
+
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::creating(function ($news) {
+            $news->customer_id = Auth::guard('customer')->user()->id;
+        });
+    }
+
+    public function customer(): BelongsTo
     {
         return $this->belongsTo('App\Models\Customer');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function news()
+
+    public function news(): BelongsTo
     {
         return $this->belongsTo('App\Models\News');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function comment()
+
+    public function parent(): BelongsTo
     {
         return $this->belongsTo('App\Models\Comment', 'parent_id');
     }

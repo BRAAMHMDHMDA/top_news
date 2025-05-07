@@ -15,7 +15,7 @@ class News extends Model
     use HasTranslations;
 
     public array $translatable = ['title', 'slug', 'content', 'meta_title', 'meta_description'];
-    protected $fillable = ['category_id', 'image_path', 'title', 'slug', 'content', 'meta_title', 'meta_description', 'is_breaking_news', 'show_at_slider', 'show_at_popular', 'status', 'is_approved', 'views', 'created_at', 'updated_at'];
+    protected $fillable = ['category_id', 'image_path', 'title', 'slug', 'content', 'meta_title', 'meta_description', 'is_breaking_news', 'show_at_slider', 'show_at_popular', 'status', 'is_approved', 'views'];
 
     protected static function boot(): void
     {
