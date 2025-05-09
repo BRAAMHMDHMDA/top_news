@@ -50,9 +50,8 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-            ])->authMiddleware([
-                Authenticate::class,
             ])
+            ->authMiddleware([Authenticate::class,])
             ->plugins([\BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()])
             ->plugin(\TomatoPHP\FilamentUsers\FilamentUsersPlugin::make())
             ->plugin(\TomatoPHP\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin::make())
@@ -89,8 +88,6 @@ class AdminPanelProvider extends PanelProvider
                 'News',
                 'Users',
                 'Settings',
-            ])
-
-            ;
+            ]);
     }
 }
