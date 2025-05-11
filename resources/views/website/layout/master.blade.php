@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="{{ app()->getLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 
 @include('website.layout.sections.head')
 
@@ -19,8 +19,9 @@
 
 <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
 
-<script type="text/javascript" src="{{ asset('website_assets/js/index_en.bundle.js') }}"></script>
-{{--    <script type="text/javascript" src="{{ asset('website_assets/js/index_ar.bundle.js') }}"></script>--}}
+
+@include('website.layout.sections.scripts')
+
 </body>
 
 </html>

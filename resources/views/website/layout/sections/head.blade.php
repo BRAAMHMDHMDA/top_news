@@ -1,8 +1,13 @@
 <head>
     <meta charset="utf-8">
-    <title>Top News HTML template </title>
+    <title>{{config('app.name')}} | {!!  $title ?? '' !!} </title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ asset('website_assets/css/styles_en.css') }}" rel="stylesheet">
-    {{--    <link href="{{ asset('website_assets/css/styles_ar.css') }}" rel="stylesheet">--}}
+
+    @if (app()->getLocale() == 'ar')
+        <link href="{{ asset('website_assets/css/styles_ar.css') }}" rel="stylesheet">
+    @else
+        <link href="{{ asset('website_assets/css/styles_en.css') }}" rel="stylesheet">
+    @endif
+
 </head>

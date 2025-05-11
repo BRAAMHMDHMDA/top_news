@@ -15,7 +15,6 @@ class Layout extends Component
         $this->title = $title;
     }
 
-
     public function render(): View|Closure|string
     {
         return view('website.layout.master');

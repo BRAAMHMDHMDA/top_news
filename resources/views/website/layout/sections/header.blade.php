@@ -19,22 +19,33 @@
                             </li>
                         </ul>
                         <div class="topbar-text">
-                            Friday, May 19, 2023
+{{--                            Friday, May 19, 2023--}}
+                            {{ \Carbon\Carbon::parse(\Illuminate\Support\Facades\Date::today())->locale(app()->getLocale())->isoFormat('dddd, D MMMM YYYY') }}
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">
                     <div class="list-unstyled topbar-right d-flex align-items-center justify-content-end">
+
                         <div class="topbar_language">
-                            <select>
-                                <option>English</option>
-                                <option>Arabic</option>
+                            <select id="languageSelector">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <option value="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                                            @if ($localeCode === LaravelLocalization::getCurrentLocale()) selected @endif>
+                                        {{ $properties['native'] }}
+                                    </option>
+                                @endforeach
                             </select>
+
                         </div>
 
                         <ul class="topbar-link">
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="register.html">Register</a></li>
+                           @auth('customer')
+                                <li><a href="{{ route('logout') }}">{{__('website.logout')}}</a></li>
+                           @else
+                                <li><a href="{{ route('login') }}">{{__('website.login')}}</a></li>
+                                <li><a href="{{ route('register') }}">{{__('website.register')}}</a></li>
+                           @endauth
                         </ul>
                     </div>
                 </div>
@@ -55,7 +66,7 @@
                     </div>
                 </div>
                 <figure class="mb-0 mx-auto">
-                    <a href="index.html">
+                    <a href="{{ route('home') }}">
                         <img src="{{ asset('website_assets/images/logo1.png') }}" alt="" class="img-fluid logo">
                     </a>
                 </figure>
@@ -63,23 +74,23 @@
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">home</a>
+                            <a class="nav-link active" href="{{ route('home') }}">{{__('website.home')}}</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="about-us.html"> about </a>
+                            <a class="nav-link" href="about-us.html">{{__('website.about')}} </a>
                         </li>
                         <li class="nav-item dropdown has-megamenu">
-                            <a class="nav-link" href="blog.html">blog </a>
+                            <a class="nav-link" href="blog.html">{{__('website.blog')}}</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Pages </a>
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> {{__('website.pages')}} </a>
                             <ul class="dropdown-menu animate fade-up">
                                 <li><a class="dropdown-item icon-arrow" href="blog_details.html"> Blog single detail
                                     </a></li>
                                 <li><a class="dropdown-item" href="404.html"> 404 Error </a>
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html"> contact </a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html"> {{__('website.contact')}} </a></li>
                     </ul>
 
 
@@ -100,7 +111,7 @@
                                     <div class="row no-gutters mt-3">
                                         <div class="col">
                                             <input class="form-control border-secondary border-right-0 rounded-0"
-                                                   type="search" value="" placeholder="Search "
+                                                   type="search" value="" placeholder="{{__('website.search')}}"
                                                    id="example-search-input4">
                                         </div>
                                         <div class="col-auto">
@@ -132,7 +143,7 @@
                         <div class="row no-gutters">
                             <div class="col">
                                 <input class="form-control border-secondary border-right-0 rounded-0" value=""
-                                       placeholder="Search">
+                                       placeholder="{{__('website.search')}}">
                             </div>
                             <div class="col-auto">
                                 <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
@@ -149,24 +160,24 @@
                     <nav class="list-group list-group-flush">
                         <ul class="navbar-nav ">
                             <li class="nav-item">
-                                <a class="nav-link active text-dark" href="index.html"> Home</a>
+                                <a class="nav-link active text-dark" href="index.html"> {{__('website.home')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="about-us.html"> About </a>
+                                <a class="nav-link text-dark" href="about-us.html"> {{__('website.about')}} </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="blog.html">Blog </a>
+                                <a class="nav-link text-dark" href="blog.html">{{__('website.blog')}} </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active dropdown-toggle  text-dark" href="#"
-                                   data-toggle="dropdown">Pages </a>
+                                   data-toggle="dropdown">{{__('website.pages')}} </a>
                                 <ul class="dropdown-menu dropdown-menu-left">
                                     <li><a class="dropdown-item" href="blog_details.html">Blog details</a></li>
                                     <li><a class="dropdown-item" href="404.html"> 404 Error</a></li>
 
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link  text-dark" href="contact.html"> Contact </a>
+                            <li class="nav-item"><a class="nav-link  text-dark" href="contact.html"> {{__('website.contact')}} </a>
                             </li>
                         </ul>
 

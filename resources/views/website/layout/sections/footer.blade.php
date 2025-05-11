@@ -150,7 +150,6 @@
                             <div class="border-top-1 bg__footer-bottom-section">
                                 <p class="text-white text-center">
                                     Copyright © 2023 Top News Theme by WebSolutionUS</p>
-
                             </div>
 
                         </div>

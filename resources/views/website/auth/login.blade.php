@@ -1,48 +1,43 @@
-<x-website.layout title="Login Page">
+<!-- login -->
+<section class="wrap__section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mx-auto" style="max-width: 380px;">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">{{ __('website.login') }}</h4>
 
-    <!-- login -->
-    <section class="wrap__section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mx-auto" style="max-width: 380px;">
-                        <div class="card-body">
-                            <h4 class="card-title mb-4">Sign in</h4>
-                            <form action="#">
-                                <a href="#" class="btn btn-facebook btn-block mb-2 text-white"> <i
-                                        class="fa fa-facebook"></i> &nbsp; Sign
-                                    in
-                                    with
-                                    Facebook</a>
-                                <a href="#" class="btn btn-primary btn-block mb-4"> <i class="fa fa-google"></i> &nbsp;
-                                    Sign in with
-                                    Google</a>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Username" type="text">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" type="password">
-                                </div>
+                        <form wire:submit="login">
+                            <a href="#" class="btn btn-facebook btn-block mb-2 text-white">
+                                <i class="fa fa-facebook"></i>
+                                {{ __('website.loginByFacebook') }}
+                            </a>
+                            <a href="#" class="btn btn-danger btn-block mb-4" style="background: red">
+                                <i class="fa fa-google"></i> &nbsp;
+                                {{ __('website.loginByGoogle') }}
+                            </a>
+                            <x-input placeholder="{{ __('website.email') }}" name="form.email"/>
 
-                                <div class="form-group">
-                                    <a href="#" class="float-right">Forgot password?</a>
-                                    <label class="float-left custom-control custom-checkbox"> <input type="checkbox"
-                                                                                                     class="custom-control-input" checked="">
-                                        <span class="custom-control-label"> Remember </span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block"> Login </button>
-                                </div>
-                            </form>
-                        </div>
+                            <x-input placeholder="{{ __('website.password') }}" name="form.password" type="password"/>
+
+
+                            <div class="form-group">
+                                <a href="#" class="float-right">{{ __('website.forget') }} {{ __('website.password') }}{{ __('website.question_mark') }}</a>
+                                <label class="float-left custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" checked="">
+                                    <span class="custom-control-label"> {{ __('website.remember') }} </span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <x-submit-btn class="btn btn-primary btn-block">{{ __('website.login') }}</x-submit-btn>
+                            </div>
+                        </form>
                     </div>
-
-                    <p class="text-center mt-4 mb-0">Don't have account? <a href="#">Sign up</a></p>
                 </div>
+
+                <p class="text-center mt-4 mb-0">{{ __('website.noAccount') }}{{ __('website.question_mark') }} <a href="{{route('register')}}">{{ __('website.register') }}</a></p>
             </div>
         </div>
-    </section>
-    <!-- end login -->
-
-</x-website.layout>
+    </div>
+</section>
+<!-- end login -->

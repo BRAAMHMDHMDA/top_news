@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Website\Auth\Actions\Logout;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,18 +13,33 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function()
+{
+    Route::get('/layout', function () {
+        return view('website.layout.master');
+    });
+    Route::get('/home', function () {
+        return view('website.index');
+    })->name('home');
 
-Route::get('/layout', function () {
-    return view('website.layout.master');
-});
-Route::get('/', function () {
-    return view('website.index');
+    Route::redirect('/', 'home');
+
+    Route::middleware('guest:customer')->group(function () {
+
+        Route::get('/login', \App\Http\Livewire\Website\Auth\Login::class)->name('login');
+        Route::get('/register', \App\Http\Livewire\Website\Auth\Register::class)->name('register');
+
+    });
+    Route::middleware('auth:customer')->group(function () {
+
+        Route::get('/logout', function (Logout $logout){
+            $logout();return redirect()->route('home');
+        })->name('logout');
+
+    });
+
 });
 
-Route::get('/login', function () {
-    return view('website.auth.login');
-});
-
-Route::get('/register', function () {
-    return view('website.auth.register');
-});

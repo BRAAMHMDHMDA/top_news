@@ -1,4 +1,4 @@
-<x-website.layout title="Home Page">
+<x-website.layout title="{{__('website.home')}}">
 
     <!-- Trending news  carousel-->
     <section class="bg-light">

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Filament\Facades\Filament;
-use Filament\Navigation\NavigationGroup;
+use Livewire\Livewire;
+use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-       //
+        Livewire::setUpdateRoute(function ($handle) {
+            return Route::prefix(LaravelLocalization::setLocale())
+                ->middleware('web') // Adjust middleware as needed
+                ->post('/livewire/update', $handle);
+        });
     }
 }
