@@ -1,0 +1,23 @@
+<?php
+
+
+/** Truncate text */
+
+function truncate(string $text, int $limit = 500): String
+{
+    return \Str::limit($text, $limit, '...');
+}
+
+/** Format date */
+function formatDate($date, $format = 'd M Y'): String
+{
+    return \Carbon\Carbon::parse($date)->translatedFormat($format);
+}
+
+/** Format DateTime */
+function formatDateTime($date, $format = 'd M Y H:i'): String
+{
+    return \Carbon\Carbon::parse($date)->translatedFormat($format);
+}
+
+

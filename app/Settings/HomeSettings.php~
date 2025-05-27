@@ -1,0 +1,15 @@
+<?php
+namespace App\Settings;
+
+use Spatie\LaravelSettings\Settings;
+
+class HomeSettings extends Settings
+{
+    public string $welcome_message;
+    public bool $show_banner;
+
+    public static function group(): string
+    {
+        return 'home';
+    }
+}

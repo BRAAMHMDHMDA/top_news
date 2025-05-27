@@ -1,0 +1,12 @@
+<?php
+
+use Spatie\LaravelSettings\Migrations\SettingsMigration;
+
+return new class extends SettingsMigration
+{
+    public function up(): void
+    {
+        $this->migrator->add('home.welcome_message', 'Welcome to our website');
+        $this->migrator->add('home.show_banner', true);
+    }
+};

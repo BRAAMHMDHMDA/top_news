@@ -10,4 +10,11 @@
         <link href="{{ asset('website_assets/css/styles_en.css') }}" rel="stylesheet">
     @endif
 
+    <style>
+        .active{
+            border-bottom: 2px solid var(--colorPrimary);
+            color: var(--colorPrimary) !important;
+        }
+    </style>
+
 </head>

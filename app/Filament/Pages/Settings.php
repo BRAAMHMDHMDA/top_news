@@ -1,0 +1,154 @@
+<?php
+
+namespace App\Filament\Pages\Settings;
+
+use App\Models\Category;
+use Closure;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\TextInput;
+use Outerweb\FilamentSettings\Filament\Pages\Settings as BaseSettings;
+
+class Settings extends BaseSettings
+{
+//    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+
+    protected static ?string $navigationGroup = 'Settings';
+    protected static ?int $navigationSort = -4;
+
+    public function schema(): array|Closure
+    {
+        $categories = Category::pluck('name', 'id')->toArray();
+
+        return [
+            Tabs::make('Settings')
+                ->schema([
+                    Tabs\Tab::make('App')
+                        ->schema([
+                            TextInput::make('app.name')
+                                ->required(),
+
+                            // app local lang
+                            Select::make('app.locale')
+                                ->label(__('language'))
+                                ->options([
+                                    'en' => 'English',
+                                    'ar' => 'Arabic',
+                                ])
+                                ->required()
+                        ])->columns(2),
+
+                    Tabs\Tab::make('Social Links')
+                        ->schema([
+                            TextInput::make('social.facebook')
+                                ->url()
+                                ->placeholder('https://www.facebook.com/yourpage')
+                                ->required(),
+
+                            TextInput::make('social.twitter')
+                                ->url()
+                                ->placeholder('https://twitter.com/yourprofile')
+                                ->required(),
+
+                            TextInput::make('social.linkedin')
+                                ->url()
+                                ->placeholder('https://www.linkedin.com/in/yourprofile')
+                                ->required(),
+
+                            TextInput::make('social.telegram')
+                                ->url()
+                                ->placeholder('https://t.me/yourprofile')
+                                ->required(),
+
+                            TextInput::make('social.whatsapp')
+                                ->url()
+                                ->placeholder('https://wa.me/yourprofile')
+                                ->required(),
+                        ]),
+
+                    Tabs\Tab::make('Home Sections')
+                        ->schema([
+                            Select::make('home.category_section_one')
+                                ->searchable()
+                                ->options($categories)
+
+                                ->required(),
+                            Select::make('home.category_section_two')
+                                ->options($categories)
+                                ->searchable()
+                                ->required(),
+                            Select::make('home.category_section_three')
+                                ->options($categories)
+                                ->searchable()
+                                ->required(),
+                            Select::make('home.category_section_four')
+                                ->options($categories)
+                                ->searchable()
+                                ->required(),
+                        ]),
+
+                    Tabs\Tab::make('Footer Sections')
+                        ->schema([
+                           Section::make('Section One')->schema([
+                               TextInput::make('footer.section_one.paragraph')
+                                   ->required(),
+                           ]),
+
+                            Section::make('Section Two')->schema([
+                                TextInput::make('footer.section_two.title')
+                                    ->required(),
+                                Repeater::make('footer.section_two.links')
+                                    ->schema([
+                                        TextInput::make('title')
+                                            ->columnSpan(1)
+                                            ->required(),
+                                        TextInput::make('url')
+                                            ->url()
+                                            ->columnSpan(3)
+                                            ->required(),
+                                    ])
+                                    ->columns(4)
+                            ]),
+
+                            Section::make('Section Three')->schema([
+                                TextInput::make('footer.section_three.title')
+                                    ->required(),
+                                Repeater::make('footer.section_three.links')
+                                    ->schema([
+                                        TextInput::make('title')
+                                            ->columnSpan(1)
+                                            ->required(),
+                                        TextInput::make('url')
+                                            ->url()
+                                            ->columnSpan(3)
+                                            ->required(),
+                                    ])
+                                    ->columns(4)
+                            ]),
+
+                            Section::make('Section Four')->schema([
+                                TextInput::make('footer.section_four.title')
+                                    ->required(),
+                                Repeater::make('footer.section_four.links')
+                                    ->schema([
+                                        TextInput::make('title')
+                                            ->columnSpan(1)
+                                            ->required(),
+                                        TextInput::make('url')
+                                            ->url()
+                                            ->columnSpan(3)
+                                            ->required(),
+                                    ])
+                                    ->columns(4)
+                            ]),
+
+
+
+                        ]),
+
+                ]),
+        ];
+    }
+}

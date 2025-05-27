@@ -107,13 +107,16 @@ class NewsResource extends Resource
                     ->numeric()
                     ->sortable(),
 
-                    Tables\Columns\TextColumn::make('user.name')
+                    Tables\Columns\TextColumn::make('author.name')
                     ->label('Author')
                     ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->sortable(),
 
                 Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
 
                 Tables\Columns\IconColumn::make('is_breaking_news')
                     ->boolean()

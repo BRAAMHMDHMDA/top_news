@@ -12,34 +12,35 @@
                                     <img src="{{ asset('website_assets/images/logo2.png') }}" alt="" class="logo-footer">
                                 </figure>
 
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius magnam harum iure
-                                    officia laudantium impedit voluptatem.</p>
+                                <p>
+                                    {{ setting('footer.section_one.paragraph') }}
+                                </p>
 
 
                                 <div class="social__media mt-4">
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white facebook">
+                                            <a href="{{ setting('social.facebook') }}" class="btn btn-social rounded text-white facebook">
                                                 <i class="fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white twitter">
+                                            <a href="{{ setting('social.twitter') }}" class="btn btn-social rounded text-white twitter">
                                                 <i class="fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white whatsapp">
+                                            <a href="{{ setting('social.whatsapp') }}" class="btn btn-social rounded text-white whatsapp">
                                                 <i class="fa fa-whatsapp"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white telegram">
+                                            <a href="{{ setting('social.telegram') }}" class="btn btn-social rounded text-white telegram">
                                                 <i class="fa fa-telegram"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="#" class="btn btn-social rounded text-white linkedin">
+                                            <a href="{{ setting('social.linkedin') }}" class="btn btn-social rounded text-white linkedin">
                                                 <i class="fa fa-linkedin"></i>
                                             </a>
                                         </li>
@@ -51,31 +52,18 @@
                             <div class="widget__footer">
                                 <div class="dropdown-footer">
                                     <h4 class="footer-title">
-                                        entertainment
+                                        {{ setting('footer.section_two.title') }}
                                         <span class="fa fa-angle-down"></span>
                                     </h4>
 
                                 </div>
 
                                 <ul class="list-unstyled option-content is-hidden">
-                                    <li>
-                                        <a href="#">celebity news</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">movies</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">tv news</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">music news</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">life style</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">entertainment video</a>
-                                    </li>
+                                    @foreach(setting('footer.section_two.links') as $link)
+                                        <li>
+                                            <a href="{{$link['url']}}">{{$link['title']}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -83,28 +71,17 @@
                             <div class="widget__footer">
                                 <div class="dropdown-footer">
                                     <h4 class="footer-title">
-                                        health
+                                        {{ setting('footer.section_three.title') }}
                                         <span class="fa fa-angle-down"></span>
                                     </h4>
 
                                 </div>
                                 <ul class="list-unstyled option-content is-hidden">
-                                    <li>
-                                        <a href="#">medical research</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">healthy living</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">mental health</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">virus corona</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">children's health</a>
-                                    </li>
-
+                                    @foreach(setting('footer.section_three.links') as $link)
+                                        <li>
+                                            <a href="{{$link['url']}}">{{$link['title']}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -112,29 +89,19 @@
                             <div class="widget__footer">
                                 <div class="dropdown-footer">
                                     <h4 class="footer-title">
-                                        business
+                                        {{ setting('footer.section_four.title') }}
+
                                         <span class="fa fa-angle-down"></span>
                                     </h4>
 
                                 </div>
 
                                 <ul class="list-unstyled option-content is-hidden">
-                                    <li>
-                                        <a href="#">merkets</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">technology</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">features</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">property</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">business leaders</a>
-                                    </li>
-
+                                    @foreach(setting('footer.section_four.links') as $link)
+                                        <li>
+                                            <a href="{{$link['url']}}">{{$link['title']}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -143,13 +110,14 @@
             </div>
 
             <!-- Footer bottom -->
-            <div class="wrapper__footer-bottom bg__footer-dark">
-                <div class="container ">
+            <div class="wrapper__footer-bottom bg__footer-dark" style="padding-top: 20px">
+                <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="border-top-1 bg__footer-bottom-section">
                                 <p class="text-white text-center">
-                                    Copyright © 2023 Top News Theme by WebSolutionUS</p>
+                                    Copyright © 2023 Top News
+                                </p>
                             </div>
 
                         </div>

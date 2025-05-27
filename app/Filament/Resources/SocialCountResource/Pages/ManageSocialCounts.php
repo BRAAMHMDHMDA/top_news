@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Filament\Resources\SocialCountResource\Pages;
+
+use App\Filament\Resources\SocialCountResource;
+use Filament\Actions;
+use Filament\Resources\Pages\ManageRecords;
+use Filament\Resources\Pages\ListRecords;
+
+
+class ManageSocialCounts extends ManageRecords
+{
+    protected static string $resource = SocialCountResource::class;
+    use ListRecords\Concerns\Translatable;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make(),
+            Actions\LocaleSwitcher::make(),
+        ];
+    }
+}

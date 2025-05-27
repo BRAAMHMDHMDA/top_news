@@ -9,13 +9,13 @@
 
                         <ul class="topbar-sosmed p-0">
                             <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="{{ setting('social.facebook') }}" target="_blank"><i class="fa fa-facebook"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="{{ setting('social.twitter') }}" target="_blank"><i class="fa fa-twitter"></i></a>
                             </li>
                             <li>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="{{ setting('social.telegram') }}" target="_blank"><i class="fa fa-telegram"></i></a>
                             </li>
                         </ul>
                         <div class="topbar-text">
@@ -73,24 +73,22 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('home') }}">{{__('website.home')}}</a>
+                        <li class="nav-item @if(Route::is('home')) active @endif">
+                            <a class="nav-link" style="color: inherit" href="{{ route('home') }}">{{__('website.home')}}</a>
                         </li>
+
+
+                        @foreach($nav_categories as $category)
+                            <li class="nav-item " >
+                                <a class="nav-link" style="color: inherit" href="{{ route('home') }}">{{$category->name}}</a>
+                            </li>
+                        @endforeach
+
+
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="about-us.html">{{__('website.about')}} </a>
+                            <a class="nav-link" href="#">{{__('website.about')}} </a>
                         </li>
-                        <li class="nav-item dropdown has-megamenu">
-                            <a class="nav-link" href="blog.html">{{__('website.blog')}}</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> {{__('website.pages')}} </a>
-                            <ul class="dropdown-menu animate fade-up">
-                                <li><a class="dropdown-item icon-arrow" href="blog_details.html"> Blog single detail
-                                    </a></li>
-                                <li><a class="dropdown-item" href="404.html"> 404 Error </a>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html"> {{__('website.contact')}} </a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"> {{__('website.contact')}} </a></li>
                     </ul>
 
 

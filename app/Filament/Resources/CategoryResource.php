@@ -5,7 +5,10 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Models\Category;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,19 +31,24 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255)
-                    ->live() // Update on every keystroke
-                    ->afterStateUpdated(function (callable $set, $state) {
-                        // Generate slug from name in real-time
+                    ->live(onBlur: true) // Trigger update on blur
+                    ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                        // Only update slug if it hasn't been manually changed
+                        if (($get('slug') ?? '') !== Str::slug($old)) {
+                            return;
+                        }
+
                         $set('slug', Str::slug($state));
                     }),
-                Forms\Components\TextInput::make('slug')
+
+                TextInput::make('slug')
                     ->required()
                     ->maxLength(255)
                     ->unique(ignoreRecord: true)
-                    ->readonly() // Use readonly instead of disabled
+                    ->readonly()
                     ->dehydrated(true),
                 Forms\Components\Toggle::make('show_at_nav')
                     ->required(),

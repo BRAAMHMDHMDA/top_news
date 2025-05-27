@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Website\Auth\Actions\Logout;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +20,9 @@ Route::group([
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
 ], function()
 {
-    Route::get('/layout', function () {
-        return view('website.layout.master');
-    });
-    Route::get('/home', function () {
-        return view('website.index');
-    })->name('home');
 
     Route::redirect('/', 'home');
+    Route::get('/home', HomeController::class)->name('home');
 
     Route::middleware('guest:customer')->group(function () {
 

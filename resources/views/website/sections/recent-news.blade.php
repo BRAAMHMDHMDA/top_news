@@ -1,0 +1,134 @@
+<div class="wrapper__list__article">
+    <h4 class="border_section">{{ __('website.recent_news') }}</h4>
+    <div class="row">
+        @foreach($news->take(2) as $item)
+        <div class="col-sm-12 col-md-6 mb-4">
+            <!-- Post Article -->
+            <div class="card__post">
+                <div class="card__post__body card__post__transition">
+                    <a href="blog_details.html">
+                        <img src="{{ $item->image_url }}" class="img-fluid" alt="{{ $item->title }}" style="height: 200px; object-fit: cover;">
+                    </a>
+                    <div class="card__post__content bg__post-cover">
+                        <div class="card__post__category">
+                            {{ $item->category->name }}
+                        </div>
+                        <div class="card__post__title" style="min-height: 60px;">
+                            <h5>
+                                <a href="#" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                    {{ $item->title }}
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="card__post__author-info">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a href="blog_details.html">
+                                        {{__('website.by')}} {{ $item->author->name }}
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <span>
+                                        {{ $item->created_at->format('F d, Y') }}
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+    <div class="row ">
+        <div class="col-sm-12 col-md-6">
+            <div class="wrapp__list__article-responsive">
+                @foreach($news->skip(2)->take(2) as $item)
+                <div class="mb-3">
+                    <!-- Post Article -->
+                    <div class="card__post card__post-list" style="min-height: 120px;">
+                        <div class="image-sm">
+                            <a href="blog_details.html">
+                                <img src="{{ $item->image_url }}" class="img-fluid" alt="{{ $item->title }}" style="height: 100px; object-fit: cover;">
+                            </a>
+                        </div>
+
+                        <div class="card__post__body ">
+                            <div class="card__post__content">
+
+                                <div class="card__post__author-info mb-2">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                                                <span class="text-primary">
+                                                                    {{__('website.by')}} {{ $item->author->name }}
+                                                                </span>
+                                        </li>
+                                        <li class="list-inline-item">
+                                                                <span class="text-dark text-capitalize">
+                                                                    {{ $item->created_at->format('F d, Y') }}
+                                                                </span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card__post__title" style="min-height: 48px;">
+                                    <h6>
+                                        <a href="blog_details.html" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                            {{ $item->title }}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 ">
+            <div class="wrapp__list__article-responsive">
+                @foreach($news->skip(4)->take(2) as $item)
+                <div class="mb-3">
+                    <!-- Post Article -->
+                    <div class="card__post card__post-list" style="min-height: 120px;">
+                        <div class="image-sm">
+                            <a href="blog_details.html">
+                                <img src="{{ $item->image_url }}" class="img-fluid" alt="{{ $item->title }}" style="height: 100px; object-fit: cover;">
+                            </a>
+                        </div>
+
+                        <div class="card__post__body ">
+                            <div class="card__post__content">
+
+                                <div class="card__post__author-info mb-2">
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                                                <span class="text-primary">
+                                                                    {{__('website.by')}} {{ $item->author->name }}
+                                                                </span>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <span class="text-dark text-capitalize">
+                                                {{ $item->created_at->translatedFormat('F d, Y') }}
+
+                                            </span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="card__post__title">
+                                    <h6>
+                                        <a href="#" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                            {{ $item->title }}
+                                        </a>
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>

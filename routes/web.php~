@@ -1,0 +1,45 @@
+<?php
+
+use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Website\Auth\Actions\Logout;
+use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function()
+{
+    Route::get('/layout', function () {
+        return view('website.layout.master');
+    });
+    Route::get('/home', HomeController::class)->name('home');
+
+    Route::redirect('/', 'home');
+
+    Route::middleware('guest:customer')->group(function () {
+
+        Route::get('/login', \App\Http\Livewire\Website\Auth\Login::class)->name('login');
+        Route::get('/register', \App\Http\Livewire\Website\Auth\Register::class)->name('register');
+
+    });
+    Route::middleware('auth:customer')->group(function () {
+
+        Route::get('/logout', function (Logout $logout){
+            $logout();return redirect()->route('home');
+        })->name('logout');
+
+    });
+
+});
+

@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Settings\Settings;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -18,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Outerweb\FilamentSettings\Filament\Plugins\FilamentSettingsPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -78,14 +80,24 @@ class AdminPanelProvider extends PanelProvider
                     ->allowCode()
                     ->allowPreview()
                     ->basePath(base_path())
-            )->plugin(
-                \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
-                    ->allowShield()
-                    ->allowLocationSettings()
-                    ->allowSiteSettings()
-                    ->allowSocialMenuSettings()
-            )->navigationGroups([
+            )
+//            ->plugin(
+//                \TomatoPHP\FilamentSettingsHub\FilamentSettingsHubPlugin::make()
+//                    ->allowShield()
+//                    ->allowLocationSettings()
+//                    ->allowSiteSettings()
+//            )
+            ->plugins([
+                FilamentSettingsPlugin::make()
+                    ->pages([
+                        Settings::class,
+                    ])
+
+
+            ])
+            ->navigationGroups([
                 'News',
+                'General',
                 'Users',
                 'Settings',
             ]);

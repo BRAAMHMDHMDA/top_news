@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Filament\Pages;
+
+use Filament\Forms;
+use Filament\Pages\Page;
+use Filament\Forms\Components\Select;
+use App\Models\Category;
+
+class HomeSettings extends Page
+{
+    protected static ?string $navigationIcon = 'heroicon-o-home';
+    protected static ?string $navigationLabel = 'Home Settings';
+    protected static ?string $slug = 'home-settings';
+    protected static ?string $title = 'Home Settings';
+
+
+    public function form(Forms\Form $form): Forms\Form
+    {
+        return $form
+            ->schema([
+                Select::make('category_1')
+                    ->label('Category 1')
+                    ->options(Category::pluck('name', 'id'))
+                    ->searchable()
+                    ->required(),
+
+                Select::make('category_2')
+                    ->label('Category 2')
+                    ->options(Category::pluck('name', 'id'))
+                    ->searchable()
+                    ->required(),
+
+                Select::make('category_3')
+                    ->label('Category 3')
+                    ->options(Category::pluck('name', 'id'))
+                    ->searchable()
+                    ->required(),
+
+                Select::make('category_4')
+                    ->label('Category 4')
+                    ->options(Category::pluck('name', 'id'))
+                    ->searchable()
+                    ->required(),
+            ]);
+    }
+}

@@ -1,0 +1,28 @@
+<?php
+
+namespace App\View\Components\Website;
+
+use App\Models\News;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class PopularNews extends Component
+{
+
+    public $news;
+    public function __construct()
+    {
+        $this->news = News::with(['category'])
+            ->activeEntries()
+            ->with('author')
+            ->where('show_at_popular', 1)
+            ->orderBy('updated_at', 'DESC')
+            ->take(4)
+            ->get();
+    }
+
+    public function render(): View
+    {
+        return view('website.sections.popular-news');
+    }
+}
