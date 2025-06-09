@@ -11,17 +11,19 @@
                                     <!-- Post Article -->
                                     <div class="card__post">
                                         <div class="card__post__body">
-                                            <a href="#">
+                                            <a href="{{ route('news.show', $slider->slug) }}">
                                                 <img src="{{ $slider->image_url }}" class="img-fluid" alt="">
                                             </a>
                                             <div class="card__post__content bg__post-cover">
-                                                <div class="card__post__category">
+                                                <a class="card__post__category"
+                                                   href="{{route('news')}}?category_id={{ $slider->category->id }}"
+                                                   style="text-decoration: none;">
                                                     {{ $slider->category->name }}
-                                                </div>
+                                                </a>
                                                 <div class="card__post__title">
                                                     <h2>
-{{--                                                        {{ route('news-details', $slider->slug) }}--}}
-                                                        <a href="#">
+                                                        {{--                                                        {{ route('news-details', $slider->slug) }}--}}
+                                                        <a href="{{ route('news.show', $slider->slug) }}">
                                                             {{ truncate($slider->title, 100) }}
                                                         </a>
                                                     </h2>
@@ -57,16 +59,18 @@
                             @if ($loop->index > 4 && $loop->index <= 6)
                                 <div class="card__post ">
                                     <div class="card__post__body card__post__transition">
-                                        <a href="#">
+                                        <a href="{{ route('news.show', $slider->slug) }}">
                                             <img src="{{ $slider->image_url }}" class="img-fluid" alt="">
                                         </a>
                                         <div class="card__post__content bg__post-cover">
-                                            <div class="card__post__category">
+                                            <a class="card__post__category"
+                                               href="{{route('news')}}?category_id={{ $slider->category->id }}"
+                                               style="text-decoration: none;">
                                                 {{ $slider->category->name }}
-                                            </div>
+                                            </a>
                                             <div class="card__post__title">
                                                 <h5>
-                                                    <a href="#">
+                                                    <a href="{{ route('news.show', $slider->slug) }}">
                                                         {{ truncate($slider->title, 100) }}
                                                     </a>
                                                 </h5>

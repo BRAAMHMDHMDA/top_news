@@ -9,17 +9,19 @@
 
                         <ul class="topbar-sosmed p-0">
                             <li>
-                                <a href="{{ setting('social.facebook') }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a href="{{ setting('social.facebook') }}" target="_blank"><i
+                                        class="fa fa-facebook"></i></a>
                             </li>
                             <li>
                                 <a href="{{ setting('social.twitter') }}" target="_blank"><i class="fa fa-twitter"></i></a>
                             </li>
                             <li>
-                                <a href="{{ setting('social.telegram') }}" target="_blank"><i class="fa fa-telegram"></i></a>
+                                <a href="{{ setting('social.telegram') }}" target="_blank"><i
+                                        class="fa fa-telegram"></i></a>
                             </li>
                         </ul>
                         <div class="topbar-text">
-{{--                            Friday, May 19, 2023--}}
+                            {{--                            Friday, May 19, 2023--}}
                             {{ \Carbon\Carbon::parse(\Illuminate\Support\Facades\Date::today())->locale(app()->getLocale())->isoFormat('dddd, D MMMM YYYY') }}
                         </div>
                     </div>
@@ -30,8 +32,9 @@
                         <div class="topbar_language">
                             <select id="languageSelector">
                                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    <option value="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
-                                            @if ($localeCode === LaravelLocalization::getCurrentLocale()) selected @endif>
+                                    <option
+                                        value="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                                        @if ($localeCode === LaravelLocalization::getCurrentLocale()) selected @endif>
                                         {{ $properties['native'] }}
                                     </option>
                                 @endforeach
@@ -40,12 +43,12 @@
                         </div>
 
                         <ul class="topbar-link">
-                           @auth('customer')
+                            @auth('customer')
                                 <li><a href="{{ route('logout') }}">{{__('website.logout')}}</a></li>
-                           @else
+                            @else
                                 <li><a href="{{ route('login') }}">{{__('website.login')}}</a></li>
                                 <li><a href="{{ route('register') }}">{{__('website.register')}}</a></li>
-                           @endauth
+                            @endauth
                         </ul>
                     </div>
                 </div>
@@ -73,14 +76,15 @@
 
                 <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
                     <ul class="navbar-nav ml-auto ">
-                        <li class="nav-item @if(Route::is('home')) active @endif">
-                            <a class="nav-link" style="color: inherit" href="{{ route('home') }}">{{__('website.home')}}</a>
+                        <li class="nav-item @if(Route::is('home')) active-link @endif">
+                            <a class="nav-link" style="color: inherit"
+                               href="{{ route('home') }}">{{__('website.home')}}</a>
                         </li>
 
-
-                        @foreach($nav_categories as $category)
-                            <li class="nav-item " >
-                                <a class="nav-link" style="color: inherit" href="{{ route('home') }}">{{$category->name}}</a>
+                        @foreach(\App\Models\Category::showAtNav()->get() as $category)
+                            <li class="nav-item ">
+                                <a class="nav-link" style="color: inherit"
+                                   href="{{ route('news') }}?category_id={{ $category->id }}">{{$category->name}}</a>
                             </li>
                         @endforeach
 
@@ -92,9 +96,10 @@
                     </ul>
 
 
-                    <!-- Search bar.// -->
+                    <!-- Search bar -->
                     <ul class="navbar-nav ">
-                        <li class="nav-item search hidden-xs hidden-sm "> <a class="nav-link" href="#">
+                        <li class="nav-item search hidden-xs hidden-sm ">
+                            <a class="nav-link" href="#">
                                 <i class="fa fa-search"></i>
                             </a>
                         </li>
@@ -105,7 +110,6 @@
                         <div class="container">
                             <div class="input-group ">
                                 <form action="#">
-
                                     <div class="row no-gutters mt-3">
                                         <div class="col">
                                             <input class="form-control border-secondary border-right-0 rounded-0"
@@ -175,7 +179,8 @@
 
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link  text-dark" href="contact.html"> {{__('website.contact')}} </a>
+                            <li class="nav-item"><a class="nav-link  text-dark"
+                                                    href="contact.html"> {{__('website.contact')}} </a>
                             </li>
                         </ul>
 

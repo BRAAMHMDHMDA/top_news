@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Filament\Pages\ManageHomeSettings;
 use App\Filament\Pages\ManageSocialSettings;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
                 ->post('/livewire/update', $handle);
         });
         $this->bootSettings();
+
 //        FilamentSettingsHub::register([
 //            SettingHold::make()
 //                ->order(2)

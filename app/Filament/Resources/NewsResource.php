@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\NewsResource\Pages;
 use App\Models\Tag;
+use Cocur\Slugify\Slugify;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -11,19 +12,21 @@ use App\Models\Category;
 use App\Models\News;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Str;
 
 class NewsResource extends Resource
 {
     use Translatable;
 
     protected static ?string $model = News::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
     protected static ?string $navigationGroup = 'News';
@@ -35,9 +38,35 @@ class NewsResource extends Resource
         return $form
             ->schema([
                Section::make()->schema([
-                   Forms\Components\TextInput::make('title')
+                   TextInput::make('title')
                        ->required()
                        ->maxLength(255),
+
+//                   TextInput::make('title')
+//                       ->required()
+//                       ->live(onBlur: true)
+//                       ->afterStateUpdated(callback: function (Get $get, Set $set, ?string $old, ?string $state, $livewire) {
+//                           $locale = $livewire->getActiveFormsLocale(); // Get current locale
+//                           if ($locale === "ar") {
+//                               // Generate Arabic slug
+//                               $slug = preg_replace('/\s+/', '-', $state);
+//                               $slug = preg_replace('/[^\p{Arabic}\d-]/u', '', $slug);
+//                               $slug = trim($slug, '-');
+//                               $set('slug', $slug);
+//                           } else {
+//                               // Generate English slug
+//                                $set('slug', $slug = Str::slug($state));
+//                           }
+//                       })
+//
+//                       ->maxLength(255),
+
+//                   TextInput::make('slug')
+//                       ->required()
+//                       ->maxLength(255)
+//                       ->unique(ignoreRecord: true)
+//                       ->readonly(),
+
                    Forms\Components\Select::make('tags')
                        ->multiple()
                        ->preload()

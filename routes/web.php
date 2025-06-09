@@ -1,7 +1,12 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Website\About;
 use App\Http\Livewire\Website\Auth\Actions\Logout;
+use App\Http\Livewire\Website\Auth\Login;
+use App\Http\Livewire\Website\Auth\Register;
+use App\Http\Livewire\Website\ListNews;
+use App\Http\Livewire\Website\ShowNews;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -18,22 +23,27 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-], function()
-{
+], function () {
 
     Route::redirect('/', 'home');
     Route::get('/home', HomeController::class)->name('home');
 
+    Route::get('/news', ListNews::class)->name('news');
+    Route::get('/news/{slug}', ShowNews::class)->name('news.show');
+    Route::get('/about-us', About::class)->name('about-us');
+
     Route::middleware('guest:customer')->group(function () {
 
-        Route::get('/login', \App\Http\Livewire\Website\Auth\Login::class)->name('login');
-        Route::get('/register', \App\Http\Livewire\Website\Auth\Register::class)->name('register');
+        Route::get('/login', Login::class)->name('login');
+        Route::get('/register', Register::class)->name('register');
+
 
     });
     Route::middleware('auth:customer')->group(function () {
 
-        Route::get('/logout', function (Logout $logout){
-            $logout();return redirect()->route('home');
+        Route::get('/logout', function (Logout $logout) {
+            $logout();
+            return redirect()->route('home');
         })->name('logout');
 
     });

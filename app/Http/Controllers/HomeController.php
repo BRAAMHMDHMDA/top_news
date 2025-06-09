@@ -9,6 +9,6 @@ class HomeController extends Controller
     public function __invoke()
     {
 
-        return view('website.index', get_defined_vars());
+        return view('website.pages.home', get_defined_vars());
     }
 }

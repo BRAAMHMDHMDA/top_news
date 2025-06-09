@@ -8,7 +8,7 @@
                 <div class="row ">
                     <div class="col-md-5">
                         <div class="card__post__transition">
-                            <a href="#">
+                            <a href="{{ route('news.show', $item->slug) }}">
                                 <img src="{{ $item->image_url }}" class="img-fluid w-100" alt="{{ $item->title }}">
                             </a>
                         </div>
@@ -16,9 +16,11 @@
                     <div class="col-md-7 my-auto pl-0">
                         <div class="card__post__body ">
                             <div class="card__post__content  ">
-                                <div class="card__post__category ">
+                                <a class="card__post__category"
+                                   href="{{route('news')}}?category_id={{ $item->category->id }}"
+                                   style="text-decoration: none;">
                                     {{ $category_name }}
-                                </div>
+                                </a>
                                 <div class="card__post__author-info mb-2">
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
@@ -29,14 +31,14 @@
                                         <li class="list-inline-item">
                                             <span class="text-dark text-capitalize">
                                                 {{ $item->created_at->format('F d, Y') }}
-{{--                                                descember 09, 2016--}}
+                                                {{--                                                descember 09, 2016--}}
                                             </span>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="card__post__title">
                                     <h5>
-                                        <a href="#">
+                                        <a href="{{ route('news.show', $item->slug) }}">
                                             {{ truncate($item->title) }}
                                         </a>
                                     </h5>

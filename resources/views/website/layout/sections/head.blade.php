@@ -11,7 +11,7 @@
     @endif
 
     <style>
-        .active{
+        .active-link {
             border-bottom: 2px solid var(--colorPrimary);
             color: var(--colorPrimary) !important;
         }

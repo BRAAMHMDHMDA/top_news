@@ -1,12 +1,11 @@
 <x-website.layout title="{{__('website.home')}}">
 
     <!-- Trending news  carousel-->
-    <x-website.breaking-news />
+    <x-website.breaking-news/>
     <!-- End Trending news carousel -->
 
-
     <!-- slider news  header-->
-    <x-website.hero-slider />
+    <x-website.hero-slider/>
     <!-- End slider news header-->
 
 
@@ -29,11 +28,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-lg-8">
-                        <x-website.recent-news />
+                        <x-website.recent-news/>
                     </div>
 
                     <div class="col-md-12 col-lg-4">
-                        <x-website.popular-news />
+                        <x-website.popular-news/>
                     </div>
                 </div>
             </div>
@@ -53,7 +52,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        <x-website.cards-news section="3" />
+                        <x-website.cards-news section="3"/>
 
                         <div class="small_add_banner">
                             <div class="small_add_banner_img">
@@ -61,11 +60,11 @@
                             </div>
                         </div>
 
-                        <x-website.cards-news section="4" />
+                        <x-website.cards-news section="4"/>
                     </div>
 
                     <div class="col-md-4">
-                        <x-website.sidebar />
+                        <x-website.sidebar/>
                     </div>
 
                     <div class="clearfix"></div>

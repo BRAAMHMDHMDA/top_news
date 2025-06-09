@@ -3,26 +3,27 @@
     <div class="wrapper__list-number">
 
         @foreach($news as $index => $item)
-        <!-- List Article -->
-        <div class="card__post__list">
-            <div class="list-number">
+            <!-- List Article -->
+            <div class="card__post__list">
+                <div class="list-number">
                 <span>
                     {{ $index + 1 }}
                 </span>
+                </div>
+                <a href="{{route('news')}}?category_id={{ $item->category->id }}" class="category">
+                    {{ $item->category->name }}
+                </a>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <h5>
+                            <a href="{{ route('news.show', $item->slug) }}"
+                               style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
+                                {{ $item->title }}
+                            </a>
+                        </h5>
+                    </li>
+                </ul>
             </div>
-            <a href="#" class="category">
-                {{ $item->category->name }}
-            </a>
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <h5>
-                        <a href="#" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">
-                            {{ $item->title }}
-                        </a>
-                    </h5>
-                </li>
-            </ul>
-        </div>
         @endforeach
     </div>
 </aside>

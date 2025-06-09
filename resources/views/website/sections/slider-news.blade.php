@@ -13,7 +13,7 @@
                         <!-- Post Article -->
                         <div class="article__entry">
                             <div class="article__image">
-                                <a href="#">
+                                <a href="{{ route('news.show', $item->slug) }}">
                                     <img src="{{ $item->image_url }}" alt="" class="img-fluid">
                                 </a>
                             </div>
@@ -27,13 +27,13 @@
                                     <li class="list-inline-item">
                                             <span>
                                                 {{ $item->created_at->format('M d, Y') }}
-{{--                                                descember 09, 2016--}}
+                                                {{--                                                descember 09, 2016--}}
                                             </span>
                                     </li>
 
                                 </ul>
                                 <h5 style="font-size: 16px">
-                                    <a href="#">
+                                    <a href="{{ route('news.show', $item->slug) }}">
                                         {{ truncate($item->title) }}
                                     </a>
                                 </h5>
