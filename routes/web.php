@@ -5,6 +5,7 @@ use App\Http\Livewire\Website\About;
 use App\Http\Livewire\Website\Auth\Actions\Logout;
 use App\Http\Livewire\Website\Auth\Login;
 use App\Http\Livewire\Website\Auth\Register;
+use App\Http\Livewire\Website\Contact;
 use App\Http\Livewire\Website\ListNews;
 use App\Http\Livewire\Website\ShowNews;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::group([
     Route::get('/news', ListNews::class)->name('news');
     Route::get('/news/{slug}', ShowNews::class)->name('news.show');
     Route::get('/about-us', About::class)->name('about-us');
+    Route::get('/contact-us', Contact::class)->name('contact-us');
 
     Route::middleware('guest:customer')->group(function () {
 

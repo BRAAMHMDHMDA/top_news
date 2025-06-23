@@ -90,9 +90,14 @@
 
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#">{{__('website.about')}} </a>
+                            <a class="nav-link" href="{{route('about-us')}}">{{__('website.about')}} </a>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="#"> {{__('website.contact')}} </a></li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{route('contact-us')}}">
+                                {{__('website.contact')}}
+                            </a>
+                        </li>
                     </ul>
 
 
@@ -109,21 +114,21 @@
                     <div class="top-search navigation-shadow">
                         <div class="container">
                             <div class="input-group ">
-                                <form action="#">
+                                <form action="{{ route('news') }}" method="get">
                                     <div class="row no-gutters mt-3">
                                         <div class="col">
                                             <input class="form-control border-secondary border-right-0 rounded-0"
                                                    type="search" value="" placeholder="{{__('website.search')}}"
-                                                   id="example-search-input4">
+                                                   id="example-search-input4" name="search">
                                         </div>
                                         <div class="col-auto">
-                                            <a class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right"
-                                               href="/search-result.html">
+                                            <button
+                                                class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right"
+                                                type="submit">
                                                 <i class="fa fa-search"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>

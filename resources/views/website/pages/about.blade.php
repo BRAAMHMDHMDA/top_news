@@ -2,7 +2,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <!-- breadcrumb -->
                 <!-- Breadcrumb -->
                 <ul class="breadcrumbs bg-light mb-4">
                     <li class="breadcrumbs__item">
@@ -19,8 +18,6 @@
                     {!! $content !!}
                 </div>
             </div>
-
-
         </div>
     </div>
 </section>

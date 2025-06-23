@@ -21,7 +21,7 @@ class EditAboutUs extends Page implements HasForms
     protected static ?string $title = 'Edit About Us Page';
     protected static ?string $navigationLabel = 'About Us Page';
     protected static ?string $navigationGroup = 'General';
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
 
     public ?array $data = [];

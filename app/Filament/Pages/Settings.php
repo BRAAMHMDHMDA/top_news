@@ -40,6 +40,18 @@ class Settings extends BaseSettings
                                 ->required()
                         ])->columns(2),
 
+                    Tabs\Tab::make('Contact')
+                        ->schema([
+                            TextInput::make('contact.email')
+                                ->email()
+                                ->required(),
+                            TextInput::make('contact.phone')
+                                ->tel()
+                                ->required(),
+                            TextInput::make('contact.address')
+                                ->required(),
+                        ]),
+
                     Tabs\Tab::make('Social Links')
                         ->schema([
                             TextInput::make('social.facebook')
@@ -73,7 +85,6 @@ class Settings extends BaseSettings
                             Select::make('home.category_section_one')
                                 ->searchable()
                                 ->options($categories)
-
                                 ->required(),
                             Select::make('home.category_section_two')
                                 ->options($categories)
@@ -91,10 +102,10 @@ class Settings extends BaseSettings
 
                     Tabs\Tab::make('Footer Sections')
                         ->schema([
-                           Section::make('Section One')->schema([
-                               TextInput::make('footer.section_one.paragraph')
-                                   ->required(),
-                           ]),
+                            Section::make('Section One')->schema([
+                                TextInput::make('footer.section_one.paragraph')
+                                    ->required(),
+                            ]),
 
                             Section::make('Section Two')->schema([
                                 TextInput::make('footer.section_two.title')
@@ -143,7 +154,6 @@ class Settings extends BaseSettings
                                     ])
                                     ->columns(4)
                             ]),
-
 
 
                         ]),

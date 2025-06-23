@@ -22,6 +22,7 @@ class SocialCountResource extends Resource
     // counts icon
     protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
     protected static ?string $navigationGroup = 'General';
+    protected static ?int $navigationSort = 3;
 
 
     public static function form(Form $form): Form
@@ -85,7 +86,9 @@ class SocialCountResource extends Resource
 
                 Tables\Columns\TextColumn::make('url')
                     ->searchable()
-                    ->url(function ($record) {return $record->url;})
+                    ->url(function ($record) {
+                        return $record->url;
+                    })
                     ->openUrlInNewTab()
                     ->toggleable(isToggledHiddenByDefault: false),
 
