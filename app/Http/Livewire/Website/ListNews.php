@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Website;
 
+use App\Models\Ad;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Support\Collection;
@@ -17,11 +18,26 @@ class ListNews extends Component
     public Collection $categories;
     #[Url(except: '')]
     public $search, $category_id;
+    public $ad_news_page;
 
 
     public function mount(): void
     {
         $this->categories = Category::active()->latest()->get();
+        $this->ad_news_page = Ad::where('position', Ad::NEWS_PAGE)
+            ->where('status', Ad::STATUS_ACTIVE)
+            ->latest()
+            ->first();
+    }
+
+    public function render(): View
+    {
+        return view('website.pages.list-news', [
+            'news' => $this->getNews(),
+        ])->layout('website.layout.master', [
+            'title' => __('website.news')
+
+        ]);
     }
 
     private function getNews()
@@ -38,15 +54,5 @@ class ListNews extends Component
             })
             ->latest()
             ->paginate(6);
-    }
-
-    public function render(): View
-    {
-        return view('website.pages.list-news' ,[
-                'news' => $this->getNews(),
-            ])->layout('website.layout.master', [
-            'title' => __('website.news')
-
-        ]);
     }
 }

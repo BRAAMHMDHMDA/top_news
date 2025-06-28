@@ -127,17 +127,19 @@
         </div>
 
         <!-- AD -->
-        <div class="large_add_banner mb-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="large_add_banner_img">
-                            <img src="{{ asset('website_assets/images/placeholder_large.jpg') }}" alt="adds">
+        @if($ad_news_page)
+            <div class="large_add_banner">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <a class="large_add_banner_img" href="{{ $ad_news_page->url }}" target="_blank">
+                                <img src="{{ $ad_news_page->image_url }}" alt="adds">
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
 
     </section>
 

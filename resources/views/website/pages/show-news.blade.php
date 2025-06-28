@@ -411,12 +411,13 @@
                     </div>
                 </div>
 
-                <div class="small_add_banner mb-5 pb-4">
-                    <div class="small_add_banner_img">
-                        <img src="{{ asset('website_assets/images/placeholder_large.jpg') }}" alt="adds">
+                @if($ad_view_page)
+                    <div class="small_add_banner mb-5 pb-4">
+                        <a class="small_add_banner_img" href="{{ $ad_view_page->url }}" target="_blank">
+                            <img src="{{ $ad_view_page->image_url }}" alt="adds">
+                        </a>
                     </div>
-                </div>
-
+                @endif
 
                 <div class="clearfix"></div>
 

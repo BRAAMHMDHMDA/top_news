@@ -9,38 +9,42 @@
                         <div class="col-md-4">
                             <div class="widget__footer">
                                 <figure class="image-logo">
-                                    <img src="{{ asset('website_assets/images/logo2.png') }}" alt="" class="logo-footer">
+                                    <img src="{{ asset('website_assets/images/logo2.png') }}" alt=""
+                                         class="logo-footer">
                                 </figure>
 
-                                <p>
-                                    {{ setting('footer.section_one.paragraph') }}
-                                </p>
+                                <p>{{ setting('footer.section_one.paragraph') }}</p>
 
 
                                 <div class="social__media mt-4">
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
-                                            <a href="{{ setting('social.facebook') }}" class="btn btn-social rounded text-white facebook">
+                                            <a href="{{ setting('social.facebook') }}"
+                                               class="btn btn-social rounded text-white facebook">
                                                 <i class="fa fa-facebook"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="{{ setting('social.twitter') }}" class="btn btn-social rounded text-white twitter">
+                                            <a href="{{ setting('social.twitter') }}"
+                                               class="btn btn-social rounded text-white twitter">
                                                 <i class="fa fa-twitter"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="{{ setting('social.whatsapp') }}" class="btn btn-social rounded text-white whatsapp">
+                                            <a href="{{ setting('social.whatsapp') }}"
+                                               class="btn btn-social rounded text-white whatsapp">
                                                 <i class="fa fa-whatsapp"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="{{ setting('social.telegram') }}" class="btn btn-social rounded text-white telegram">
+                                            <a href="{{ setting('social.telegram') }}"
+                                               class="btn btn-social rounded text-white telegram">
                                                 <i class="fa fa-telegram"></i>
                                             </a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="{{ setting('social.linkedin') }}" class="btn btn-social rounded text-white linkedin">
+                                            <a href="{{ setting('social.linkedin') }}"
+                                               class="btn btn-social rounded text-white linkedin">
                                                 <i class="fa fa-linkedin"></i>
                                             </a>
                                         </li>

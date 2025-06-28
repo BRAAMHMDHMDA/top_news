@@ -8,18 +8,20 @@
     <x-website.hero-slider/>
     <!-- End slider news header-->
 
-
-    <div class="large_add_banner">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="large_add_banner_img">
-                        <img src="{{ asset('website_assets/images/placeholder_large.jpg') }}" alt="adds">
+    @if($ad_home_top)
+        <div class="large_add_banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <a class="large_add_banner_img" href="{{ $ad_home_top->url }}" target="_blank">
+                            <img src="{{ $ad_home_top->image_url }}" alt="adds">
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
+
 
     <!-- Popular news category -->
     <section class="pt-0 mt-5">
@@ -54,11 +56,13 @@
                     <div class="col-md-8">
                         <x-website.cards-news section="3"/>
 
-                        <div class="small_add_banner">
-                            <div class="small_add_banner_img">
-                                <img src="{{ asset('website_assets/images/placeholder_large.jpg') }}" alt="adds">
+                        @if($ad_home_middle)
+                            <div class="small_add_banner">
+                                <a class="small_add_banner_img" href="{{ $ad_home_middle->url }}" target="_blank">
+                                    <img src="{{ $ad_home_middle->image_url }}" alt="adds">
+                                </a>
                             </div>
-                        </div>
+                        @endif
 
                         <x-website.cards-news section="4"/>
                     </div>

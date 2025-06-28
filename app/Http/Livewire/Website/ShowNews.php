@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Website;
 
+use App\Models\Ad;
 use App\Models\Comment;
 use App\Models\News;
 use Livewire\Component;
@@ -13,9 +14,15 @@ class ShowNews extends Component
 
     public $news, $nextPost, $previousPost, $relatedPosts;
     public $comment, $parent_id;
+    public $ad_view_page;
 
     public function mount($slug): void
     {
+        $this->ad_view_page = Ad::where('position', Ad::VIEW_PAGE)
+            ->where('status', Ad::STATUS_ACTIVE)
+            ->latest()
+            ->first();
+
         $this->news = News::activeEntries()
             ->where('slug', $slug)
             ->with(['category', 'author', 'tags'])

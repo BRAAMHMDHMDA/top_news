@@ -129,14 +129,16 @@
         </div>
     </aside>
 
-    <aside class="wrapper__list__article" style="margin-top: 40px">
-        <h4 class="border_section">{{ __('website.advertisement') }}</h4>
-        <a href="#">
-            <figure>
-                <img src="{{ asset('website_assets/images/newsimage3.png') }}" alt="" class="img-fluid">
-            </figure>
-        </a>
-    </aside>
+    @if($ad_sidebar)
+        <aside class="wrapper__list__article" style="margin-top: 40px">
+            <h4 class="border_section">{{ __('website.advertisement') }}</h4>
+            <a href="{{$ad_sidebar->url}}" target="_blank">
+                <figure>
+                    <img src="{{ $ad_sidebar->image_url }}" alt="" class="img-fluid">
+                </figure>
+            </a>
+        </aside>
+    @endif
 
     <livewire:website.newsletter/>
 
