@@ -19,6 +19,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Jeffgreco13\FilamentBreezy\BreezyCore;
 use Outerweb\FilamentSettings\Filament\Plugins\FilamentSettingsPlugin;
 
 class AdminPanelProvider extends PanelProvider
@@ -31,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Blue ,
+                'primary' => Color::Blue,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -100,6 +101,17 @@ class AdminPanelProvider extends PanelProvider
                 'General',
                 'Users',
                 'Settings',
-            ]);
+            ])
+            ->plugin(
+                BreezyCore::make()
+                    ->myProfile(
+                        hasAvatars: true,
+                        navigationGroup: 'Settings',
+                        userMenuLabel: 'My Profile',
+                    )
+                    ->enableBrowserSessions(condition: true) // Enable the Browser Sessions feature (default = true)
+                    ->avatarUploadComponent(fn($fileUpload) => $fileUpload->disableLabel())
+
+            );
     }
 }
