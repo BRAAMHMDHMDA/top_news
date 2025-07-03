@@ -28,6 +28,8 @@ class ShowNews extends Component
             ->with(['category', 'author', 'tags'])
             ->firstOrFail();
 
+        $this->countView();
+
         $this->nextPost = News::where('id', '>', $this->news->id)
             ->activeEntries()
 //            ->where('category_id', $this->news->category_id)
@@ -46,6 +48,22 @@ class ShowNews extends Component
             ->inRandomOrder()
             ->take(5)
             ->get();
+    }
+
+    private function countView(): void
+    {
+        if (session()->has('viewed_posts')) {
+            $postIds = session('viewed_posts');
+            if (!in_array($this->news->id, $postIds)) {
+                $postIds[] = $this->news->id;
+                $this->news->increment('views');
+            }
+            session(['viewed_posts' => $postIds]);
+
+        } else {
+            session(['viewed_posts' => [$this->news->id]]);
+            $this->news->increment('views');
+        }
     }
 
     public function getCommentsProperty()
@@ -93,7 +111,6 @@ class ShowNews extends Component
 
         session()->flash('success', __('website.comment_deleted'));
     }
-
 
     public function render()
     {
