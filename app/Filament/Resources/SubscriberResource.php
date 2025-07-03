@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubscriberResource\Pages;
-use App\Filament\Resources\SubscriberResource\RelationManagers;
 use App\Models\Subscriber;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -17,17 +16,6 @@ class SubscriberResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $navigationGroup = 'General';
     protected static ?int $navigationSort = 2;
-
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-            ]);
-    }
 
     public static function table(Table $table): Table
     {
@@ -56,6 +44,17 @@ class SubscriberResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
+            ])->columns(1);
     }
 
     public static function getPages(): array
