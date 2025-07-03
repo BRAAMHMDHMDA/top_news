@@ -29,6 +29,11 @@ Route::group([
     Route::redirect('/', 'home');
     Route::get('/home', HomeController::class)->name('home');
 
+    // Customer Profile
+    Route::middleware(['auth:customer'])->group(function () {
+        Route::get('/profile', \App\Http\Livewire\Website\Profile::class)->name('customer.profile');
+    });
+
     Route::get('/news', ListNews::class)->name('news');
     Route::get('/news/{slug}', ShowNews::class)->name('news.show');
     Route::get('/about-us', About::class)->name('about-us');
@@ -43,7 +48,7 @@ Route::group([
     });
     Route::middleware('auth:customer')->group(function () {
 
-        Route::get('/logout', function (Logout $logout) {
+        Route::post('/logout', function (Logout $logout) {
             $logout();
             return redirect()->route('home');
         })->name('logout');

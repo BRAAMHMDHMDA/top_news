@@ -11,14 +11,14 @@ class Ad extends Model
 
     const STATUS_DRAFT = 'draft';
     const STATUS_ACTIVE = 'active';
-
-    //status
     const HOME_TOP = 'home_top';
     const HOME_MIDDLE = 'home_middle';
 
-    // positions ads
+    //status
     const NEWS_PAGE = 'news_page';
     const VIEW_PAGE = 'view_page';
+
+    // positions ads
     const SIDE_BAR = 'side_bar';
     static string $DISK = 'public';
     static string $NAME_IMG_COL = 'image_path';

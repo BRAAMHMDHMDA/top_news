@@ -5,7 +5,7 @@
         <div class="container ">
             <div class="row">
                 <div class="col-sm-6 col-md-8">
-                    <div class="topbar-left topbar-right d-flex">
+                    <div class="topbar-left topbar-right d-flex" style="height: 100%;align-items: center;">
 
                         <ul class="topbar-sosmed p-0">
                             <li>
@@ -42,12 +42,55 @@
 
                         </div>
 
-                        <ul class="topbar-link">
+                        <ul class="topbar-link" style="padding: 0">
                             @auth('customer')
-                                <li><a href="{{ route('logout') }}">{{__('website.logout')}}</a></li>
+                                <li class="dropdown">
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                                       data-toggle="dropdown">
+                                        @if(Auth::guard('customer')->user()->image_path)
+                                            <img src="{{ Auth::guard('customer')->user()->image_url }}"
+                                                 alt="{{ Auth::guard('customer')->user()->name }}"
+                                                 class="rounded-circle me-2"
+                                                 style="width: 32px; height: 32px; object-fit: cover; margin-right: 5px">
+                                        @else
+                                            <div
+                                                class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2"
+                                                style="width: 32px; height: 32px;">
+                                                {{ strtoupper(substr(Auth::guard('customer')->user()->name, 0, 1)) }}
+                                            </div>
+                                        @endif
+                                        <span>{{ Auth::guard('customer')->user()->name }}</span>
+                                    </a>
+                                    <ul class="dropdown-menu animate fade-up">
+                                        <li class="dropdown-item p-0">
+                                            <a class="dropdown-item d-flex align-items-center text-dark"
+                                               style="background: transparent"
+                                               href="{{ route('customer.profile') }}">
+                                                <i class="fa fa-user-circle" style="margin-right: 5px"></i>
+                                                <span>{{__('website.profile')}}</span>
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-item p-0">
+                                            <a class="dropdown-item d-flex align-items-center text-dark"
+                                               style="background: transparent"
+                                               href="{{ route('logout') }}"
+                                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fa fa-sign-out" style="margin-right: 5px"></i>
+                                                <span>{{__('website.logout')}}</span>
+                                            </a>
+                                        </li>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                              style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </ul>
+                                </li>
+
                             @else
-                                <li><a href="{{ route('login') }}">{{__('website.login')}}</a></li>
-                                <li><a href="{{ route('register') }}">{{__('website.register')}}</a></li>
+                                <li style="padding: 10px"><a href="{{ route('login') }}">{{__('website.login')}}</a>
+                                </li>
+                                <li style="padding: 10px"><a
+                                        href="{{ route('register') }}">{{__('website.register')}}</a></li>
                             @endauth
                         </ul>
                     </div>

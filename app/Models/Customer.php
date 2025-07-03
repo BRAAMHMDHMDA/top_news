@@ -2,16 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Traits\HasImage;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class Customer extends Authenticatable
 {
+    use HasImage;
+
+    static string $DISK = 'public';
+    static string $NAME_IMG_COL = 'image_path';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'image_path',
     ];
     protected $hidden = [
         'password',
@@ -22,6 +29,7 @@ class Customer extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
     public function comments(): HasMany
     {
         return $this->hasMany('App\Models\Comment');
