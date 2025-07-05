@@ -110,7 +110,7 @@
                                     <a class="btn btn-linkedin-o linkedin"
                                        href="https://www.linkedin.com/shareArticle?mini=true&url={{ url()->current() }}&title={{ $news->title }}"
                                        target="_blank">
-                                        <i class="fa fa-linkedin"></i>
+                                        & <i class="fa fa-linkedin"></i>
                                         <span>linkedin</span>
                                     </a>
                                 </li>

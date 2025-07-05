@@ -3,24 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\NewsResource\Pages;
-use App\Models\Tag;
+use App\Models\News;
 use Cocur\Slugify\Slugify;
-use Filament\Forms\Components\RichEditor;
+use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
-use App\Models\Category;
-use App\Models\News;
-use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Str;
+use FilamentTiptapEditor\TiptapEditor;
 
 class NewsResource extends Resource
 {
@@ -28,7 +21,6 @@ class NewsResource extends Resource
 
     protected static ?string $model = News::class;
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
-
     protected static ?string $navigationGroup = 'News';
     protected static ?int $navigationSort = 3;
 
@@ -37,10 +29,10 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
-               Section::make()->schema([
-                   TextInput::make('title')
-                       ->required()
-                       ->maxLength(255),
+                Section::make()->schema([
+                    TextInput::make('title')
+                        ->required()
+                        ->maxLength(255),
 
 //                   TextInput::make('title')
 //                       ->required()
@@ -67,53 +59,54 @@ class NewsResource extends Resource
 //                       ->unique(ignoreRecord: true)
 //                       ->readonly(),
 
-                   Forms\Components\Select::make('tags')
-                       ->multiple()
-                       ->preload()
-                       ->relationship(name: 'tags', titleAttribute: 'name')
-                       ->createOptionForm([
-                           Forms\Components\TextInput::make('name')
-                               ->required(),
+                    Forms\Components\Select::make('tags')
+                        ->multiple()
+                        ->preload()
+                        ->relationship(name: 'tags', titleAttribute: 'name')
+                        ->createOptionForm([
+                            Forms\Components\TextInput::make('name')
+                                ->required(),
 
-                       ]),
+                        ]),
 
-                   Forms\Components\Select::make('category_id')
-                       ->relationship('category', 'name')
-                       ->getOptionLabelFromRecordUsing(function ($record, $livewire) {
-                           $locale = $livewire->activeLocale ?? app()->getLocale();
-                           return $record->getTranslation('name', $locale);
-                       })
-                       ->required(),
+                    Forms\Components\Select::make('category_id')
+                        ->relationship('category', 'name')
+                        ->getOptionLabelFromRecordUsing(function ($record, $livewire) {
+                            $locale = $livewire->activeLocale ?? app()->getLocale();
+                            return $record->getTranslation('name', $locale);
+                        })
+                        ->required(),
 
-                   Forms\Components\FileUpload::make('image_path')
-                       ->label('Image')
-                       ->disk('public')
-                       ->directory('news')
-                       ->image()
-                       ->required(),
+                    Forms\Components\FileUpload::make('image_path')
+                        ->label('Image')
+                        ->disk('public')
+                        ->directory('news')
+                        ->image()
+                        ->required(),
 
-                   Forms\Components\RichEditor::make('content')
-                       ->required()
-                       ->columnSpanFull(),
-                   Forms\Components\Fieldset::make('SEO')->schema([
-                       Forms\Components\TextInput::make('meta_title')
-                           ->maxLength(255)->columnSpan(4),
-                       Forms\Components\TextInput::make('meta_description')
-                           ->maxLength(255)->columnSpan(4),
-                   ]),
+                    TiptapEditor::make('content')
+                        ->required()
+                        ->profile('default') // Use a predefined profile or customize as needed
+                        ->columnSpanFull(),
+                    Forms\Components\Fieldset::make('SEO')->schema([
+                        Forms\Components\TextInput::make('meta_title')
+                            ->maxLength(255)->columnSpan(4),
+                        Forms\Components\TextInput::make('meta_description')
+                            ->maxLength(255)->columnSpan(4),
+                    ]),
 
-                   Forms\Components\Fieldset::make('Settings')->schema([
-                       Forms\Components\Toggle::make('status')
-                           ->required(),
-                       Forms\Components\Toggle::make('is_breaking_news')
-                           ->required(),
-                       Forms\Components\Toggle::make('show_at_slider')
-                           ->required(),
-                       Forms\Components\Toggle::make('show_at_popular')
-                           ->required(),
-                   ])->columns(4),
+                    Forms\Components\Fieldset::make('Settings')->schema([
+                        Forms\Components\Toggle::make('status')
+                            ->required(),
+                        Forms\Components\Toggle::make('is_breaking_news')
+                            ->required(),
+                        Forms\Components\Toggle::make('show_at_slider')
+                            ->required(),
+                        Forms\Components\Toggle::make('show_at_popular')
+                            ->required(),
+                    ])->columns(4),
 
-               ])->columns(2),
+                ])->columns(2),
 
             ]);
     }
@@ -136,7 +129,7 @@ class NewsResource extends Resource
                     ->numeric()
                     ->sortable(),
 
-                    Tables\Columns\TextColumn::make('author.name')
+                Tables\Columns\TextColumn::make('author.name')
                     ->label('Author')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -157,10 +150,8 @@ class NewsResource extends Resource
                 Tables\Columns\IconColumn::make('show_at_popular')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\IconColumn::make('status')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_approved')
-                    ->boolean(),
+                Tables\Columns\ToggleColumn::make('status'),
+                Tables\Columns\ToggleColumn::make('is_approved'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

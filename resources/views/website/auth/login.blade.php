@@ -22,9 +22,9 @@
 
 
                             <div class="form-group">
-                                <a href="#" class="float-right">{{ __('website.forget') }} {{ __('website.password') }}{{ __('website.question_mark') }}</a>
+                                <a href="{{ route('password.request') }}" class="float-right">{{ __('website.forgot_password') }}{{ __('website.question_mark') }}</a>
                                 <label class="float-left custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" checked="">
+                                    <input type="checkbox" wire:model.live="form.remember" class="custom-control-input">
                                     <span class="custom-control-label"> {{ __('website.remember') }} </span>
                                 </label>
                             </div>

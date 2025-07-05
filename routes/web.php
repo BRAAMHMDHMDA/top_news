@@ -40,11 +40,15 @@ Route::group([
     Route::get('/contact-us', Contact::class)->name('contact-us');
 
     Route::middleware('guest:customer')->group(function () {
-
         Route::get('/login', Login::class)->name('login');
         Route::get('/register', Register::class)->name('register');
-
-
+        
+        // Password Reset Routes
+        Route::get('/forgot-password', \App\Http\Livewire\Website\Auth\ForgotPassword::class)
+            ->name('password.request');
+            
+        Route::get('/reset-password/{token}/{email}', \App\Http\Livewire\Website\Auth\ResetPassword::class)
+            ->name('password.reset');
     });
     Route::middleware('auth:customer')->group(function () {
 

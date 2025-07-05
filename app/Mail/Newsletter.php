@@ -40,7 +40,7 @@ class Newsletter extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'mail.newsletter',
+            view: 'emails.newsletter',
         );
     }
 
