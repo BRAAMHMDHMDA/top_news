@@ -44,6 +44,7 @@ return array(
     '3bd81c9b8fcc150b69d8b63b4d2ccf23' => $vendorDir . '/spatie/flare-client-php/src/helpers.php',
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     '6e64621fecec74900088e69f40e7fb39' => $vendorDir . '/outerweb/settings/src/Helpers/helpers.php',
+    'decc78cc4436b1292c6c0d151b19445c' => $vendorDir . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
     '377b22b161c09ed6e5152de788ca020a' => $vendorDir . '/spatie/laravel-permission/src/helpers.php',
     '096c2d3bc2fc8bdd430b86b9391cf287' => $vendorDir . '/awcodes/filament-tiptap-editor/src/helpers.php',

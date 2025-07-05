@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Livewire\Website\About;
 use App\Http\Livewire\Website\Auth\Actions\Logout;
 use App\Http\Livewire\Website\Auth\Login;
@@ -49,6 +50,10 @@ Route::group([
             
         Route::get('/reset-password/{token}/{email}', \App\Http\Livewire\Website\Auth\ResetPassword::class)
             ->name('password.reset');
+
+        // Google OAuth
+        Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+        Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
     });
     Route::middleware('auth:customer')->group(function () {
 
@@ -60,4 +65,3 @@ Route::group([
     });
 
 });
-

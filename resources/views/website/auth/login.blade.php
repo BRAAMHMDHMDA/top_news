@@ -12,7 +12,7 @@
                                 <i class="fa fa-facebook"></i>
                                 {{ __('website.loginByFacebook') }}
                             </a>
-                            <a href="#" class="btn btn-danger btn-block mb-4" style="background: red">
+                            <a href="{{ route('google.login') }}" class="btn btn-danger btn-block mb-4" style="background: red">
                                 <i class="fa fa-google"></i> &nbsp;
                                 {{ __('website.loginByGoogle') }}
                             </a>
