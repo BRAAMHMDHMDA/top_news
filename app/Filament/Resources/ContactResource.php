@@ -143,4 +143,5 @@ class ContactResource extends Resource
             'index' => Pages\ManageContacts::route('/'),
         ];
     }
+
 }

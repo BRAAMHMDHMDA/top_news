@@ -54,6 +54,8 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('60s')
             ->authMiddleware([Authenticate::class,])
             ->plugins([\BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()])
             ->plugin(\TomatoPHP\FilamentUsers\FilamentUsersPlugin::make())
@@ -88,14 +90,14 @@ class AdminPanelProvider extends PanelProvider
 //                    ->allowLocationSettings()
 //                    ->allowSiteSettings()
 //            )
-            ->plugins([
+            ->plugin(
                 FilamentSettingsPlugin::make()
                     ->pages([
                         Settings::class,
                     ])
-
-
-            ])
+            )
+            ->topNavigation(false)
+            ->globalSearch(false)
             ->navigationGroups([
                 'News',
                 'General',

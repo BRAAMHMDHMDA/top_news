@@ -237,7 +237,8 @@
                                                     <aside class="comment-body">
                                                         <div class="comment-meta">
                                                             <div class="comment-author vcard">
-                                                                <img src="" class="avatar" alt="image">
+                                                                <img src="{{ $comment->customer->image_url}}"
+                                                                     class="avatar" alt="image">
                                                                 <b class="fn">{{ $reply->customer->name }}</b>
                                                                 <span class="says">says:</span>
                                                             </div>
