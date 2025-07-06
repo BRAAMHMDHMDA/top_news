@@ -7,11 +7,10 @@ use App\Models\Contact;
 use App\Models\Subscriber;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\HtmlString;
 
 class NotificationsWidget extends BaseWidget
 {
-    protected static ?string $pollingInterval = '30s';
+    protected static ?string $pollingInterval = '60s';
     protected static bool $isLazy = true;
 
     protected function getStats(): array
