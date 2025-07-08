@@ -13,7 +13,6 @@ use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\TiptapEditor;
 
 class NewsResource extends Resource
 {
@@ -84,9 +83,10 @@ class NewsResource extends Resource
                         ->image()
                         ->required(),
 
-                    TiptapEditor::make('content')
+                    Forms\Components\RichEditor::make('content')
                         ->required()
-                        ->profile('default') // Use a predefined profile or customize as needed
+
+//                        ->profile('default') // Use a predefined profile or customize as needed
                         ->columnSpanFull(),
                     Forms\Components\Fieldset::make('SEO')->schema([
                         Forms\Components\TextInput::make('meta_title')

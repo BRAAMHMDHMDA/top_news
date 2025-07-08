@@ -3,7 +3,6 @@
 namespace App\View\Components\Website;
 
 use App\Models\News;
-use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -14,9 +13,10 @@ class BreakingNews extends Component
     public function __construct()
     {
         $this->breakingNews = News::with('author')
-            ->where(['is_breaking_news' => 1,])
+            ->where(['is_breaking_news' => 1])
             ->activeEntries()
-            ->orderBy('id', 'DESC')->take(10)
+            ->latest()
+            ->take(10)
             ->get();
     }
 

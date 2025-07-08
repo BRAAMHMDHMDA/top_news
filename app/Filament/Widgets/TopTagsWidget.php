@@ -4,12 +4,15 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\NewsResource;
 use App\Models\Tag;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
 
 class TopTagsWidget extends BaseWidget
 {
+    use HasWidgetShield;
+
     protected static ?int $sort = 5;
     protected int|string|array $columnSpan = '1/2';
 

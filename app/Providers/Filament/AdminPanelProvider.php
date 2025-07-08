@@ -42,14 +42,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                \App\Filament\Widgets\StatsOverview::class,
-//                \App\Filament\Widgets\NewsCountWidget::class,
-//                \App\Filament\Widgets\SubscriberCountWidget::class,
-//                \App\Filament\Widgets\CustomerCountWidget::class,
-//                \App\Filament\Widgets\TopNewsByViewsWidget::class,
-//                \App\Filament\Widgets\TopNewsByCommentsWidget::class,
-//                \App\Filament\Widgets\TopCategoriesWidget::class,
-//                \App\Filament\Widgets\TopTagsWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

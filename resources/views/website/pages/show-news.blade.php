@@ -67,7 +67,7 @@
                                 <span>
                                     {{ __('website.views') }}:
                                 </span>
-                                15K
+                                {{ $news->views }}
                             </div>
 
                             <ul class="list-inline">

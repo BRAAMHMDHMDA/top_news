@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Models\About;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -15,6 +16,7 @@ use Filament\Tables\Actions\Action;
 class EditAboutUs extends Page implements HasForms
 {
     use InteractsWithForms;
+    use HasPageShield;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static string $view = 'filament.pages.edit-about-us';

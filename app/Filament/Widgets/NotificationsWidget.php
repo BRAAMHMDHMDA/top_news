@@ -5,11 +5,14 @@ namespace App\Filament\Widgets;
 use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\Subscriber;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class NotificationsWidget extends BaseWidget
 {
+    use HasWidgetShield;
+
     protected static ?string $pollingInterval = '60s';
     protected static bool $isLazy = true;
 

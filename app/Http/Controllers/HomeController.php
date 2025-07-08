@@ -8,6 +8,9 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
+//        $news = News::where('id', 51)
+//            ->first();
+//        dd($news->content);
         $ad_home_top = Ad::where('position', Ad::HOME_TOP)
             ->where('status', Ad::STATUS_ACTIVE)
             ->latest()

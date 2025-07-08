@@ -59,7 +59,6 @@ class ShowNews extends Component
                 $this->news->increment('views');
             }
             session(['viewed_posts' => $postIds]);
-
         } else {
             session(['viewed_posts' => [$this->news->id]]);
             $this->news->increment('views');

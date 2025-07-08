@@ -3,6 +3,7 @@
 namespace App\Filament\Pages\Settings;
 
 use App\Models\Category;
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Closure;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
@@ -14,6 +15,7 @@ use Outerweb\FilamentSettings\Filament\Pages\Settings as BaseSettings;
 class Settings extends BaseSettings
 {
 //    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+    use HasPageShield;
 
     protected static ?string $navigationGroup = 'Settings';
     protected static ?int $navigationSort = -4;

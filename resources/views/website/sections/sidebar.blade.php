@@ -1,4 +1,4 @@
-<div class="sticky-top">
+<div class="sticky-top  mt-5">
     <aside class="wrapper__list__article">
         <h4 class="border_section">
             {{ __('website.most_viewed') }}

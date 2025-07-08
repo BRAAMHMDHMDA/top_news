@@ -30,6 +30,16 @@ class ListNews extends Component
             ->first();
     }
 
+    public function updatingSearch(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatingCategoryId(): void
+    {
+        $this->resetPage();
+    }
+
     public function render(): View
     {
         return view('website.pages.list-news', [

@@ -38,7 +38,7 @@ class AdResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\FileUpload::make('image')
+                Forms\Components\FileUpload::make('image_path')
                     ->image()
                     ->required(),
 
@@ -61,7 +61,8 @@ class AdResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('position')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
+                Tables\Columns\ImageColumn::make('image_path')
+                    ->label('Image'),
 
                 Tables\Columns\TextColumn::make('url')
                     ->searchable(),

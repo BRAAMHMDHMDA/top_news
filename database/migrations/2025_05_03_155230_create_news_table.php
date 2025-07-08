@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -16,11 +15,11 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('author_id');
             $table->string('image_path');
-            $table->string('title', 255)->unique();
+            $table->json('title')->unique();
             $table->string('slug')->unique();
             $table->text('content');
-            $table->string('meta_title', 255)->nullable();
-            $table->string('meta_description', 255)->nullable();
+            $table->json('meta_title')->nullable();
+            $table->json('meta_description')->nullable();
             $table->boolean('is_breaking_news')->default(0);
             $table->boolean('show_at_slider')->default(0);
             $table->boolean('show_at_popular')->default(0);

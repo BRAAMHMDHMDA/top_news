@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasImage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +14,7 @@ use Spatie\Translatable\HasTranslations;
 
 class News extends Model
 {
-    use HasTranslations, HasImage;
+    use HasFactory, HasTranslations, HasImage;
 
     static string $DISK = 'public';
     static string $NAME_IMG_COL = 'image_path';
@@ -33,10 +34,22 @@ class News extends Model
     {
         parent::boot();
         static::creating(function ($news) {
-            $news->author_id = Auth::guard('web')->user()->id;
+            // Only set author_id if not already set and there's an authenticated user
+            if (empty($news->author_id) && Auth::guard('web')->check()) {
+                $news->author_id = Auth::guard('web')->user()->id;
+            }
+            
+            // Ensure we have a slug
+            if (empty($news->slug) && !empty($news->title)) {
+                $news->slug = Str::slug(is_array($news->title) ? $news->title['en'] : $news->title);
+            }
         });
+        
         static::saving(function ($news) {
-            $news->slug = Str::slug($news->title);
+            // Ensure we have a slug
+            if (empty($news->slug) && !empty($news->title)) {
+                $news->slug = Str::slug(is_array($news->title) ? $news->title['en'] : $news->title);
+            }
         });
     }
 

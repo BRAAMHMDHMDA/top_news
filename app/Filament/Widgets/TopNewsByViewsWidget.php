@@ -4,12 +4,15 @@ namespace App\Filament\Widgets;
 
 use App\Filament\Resources\NewsResource;
 use App\Models\News;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Database\Eloquent\Builder;
 
 class TopNewsByViewsWidget extends BaseWidget
 {
+    use HasWidgetShield;
+
     protected static ?int $sort = 2;
 
     protected int|string|array $columnSpan = 'full';
