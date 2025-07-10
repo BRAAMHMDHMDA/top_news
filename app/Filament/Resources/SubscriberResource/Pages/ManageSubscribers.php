@@ -17,22 +17,30 @@ class ManageSubscribers extends ManageRecords
 {
     protected static string $resource = SubscriberResource::class;
 
+    public function getTitle(): string
+    {
+        return __('filament::subscribers');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
                 ->icon('heroicon-m-plus')
-                ->label('Add Subscriber')
-                ->modalHeading('Add New Subscriber')
+                ->label(__('filament::add_subscriber'))
+                ->modalHeading(__('filament::add_subscriber'))
                 ->modalWidth(MaxWidth::MaxContent)
             ,
             Actions\Action::make('sendEmail')
-                ->label('Send Newsletter')
+                ->label(__('filament::send_newsletter'))
+                ->modalHeading(__('filament::send_newsletter'))
                 ->form([
                     Forms\Components\TextInput::make('subject')
+                        ->label(__('filament::subject'))
                         ->required()
                         ->maxLength(255),
                     TiptapEditor::make('content')
+                        ->label(__('filament::content'))
                         ->profile('default') // Use a predefined profile or customize as needed
                         ->required(),
                 ])
@@ -41,11 +49,11 @@ class ManageSubscribers extends ManageRecords
                     Mail::to($subscribers)->send(new Newsletter($data['subject'], $data['content']));
                     Notification::make()
                         ->success()
-                        ->title('Newsletter Sent Successfully')
+                        ->title(__('newsletter_sent'))
                         ->send();
                 })
                 ->color('warning')
-                ->modalHeading('Send Newsletter')
+                ->modalHeading(__('filament::send_newsletter'))
                 ->modalDescription('null')
                 ->icon('heroicon-m-envelope')
                 ->requiresConfirmation()

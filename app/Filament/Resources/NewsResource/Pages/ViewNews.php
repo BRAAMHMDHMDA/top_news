@@ -3,13 +3,13 @@
 namespace App\Filament\Resources\NewsResource\Pages;
 
 use App\Filament\Resources\NewsResource;
-use Filament\Resources\Pages\ViewRecord;
-use Filament\Infolists\Infolist;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Components\ImageEntry;
-use Filament\Infolists\Components\IconEntry;
-use Filament\Infolists\Components\Section;
 use Filament\Actions;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
+use Filament\Resources\Pages\ViewRecord;
 
 class ViewNews extends ViewRecord
 {
@@ -18,21 +18,16 @@ class ViewNews extends ViewRecord
 
     protected static string $resource = NewsResource::class;
 
-    protected static ?string $title = 'View News';
-
-    protected function getHeaderActions(): array
+    public function getTitle(): string
     {
-        return [
-            Actions\LocaleSwitcher::make(),
-            Actions\EditAction::make(),
-        ];
+        return __('filament::view_news');
     }
 
     public function infolist(Infolist $infolist): Infolist
     {
         return $infolist
             ->schema([
-                Section::make('Article')
+                Section::make()
                     ->schema([
                         ImageEntry::make('image_path')
                             ->label('')
@@ -44,19 +39,23 @@ class ViewNews extends ViewRecord
 //                            ->extraAttributes(['class' => 'rounded-lg shadow-lg mb-6 object-cover']),
                         TextEntry::make('title')
                             ->label('')
-                            ->formatStateUsing(fn ($state) => "<h1 class='text-3xl font-bold mb-4'>{$state}</h1>")
+                            ->formatStateUsing(fn($state) => "<h1 class='text-3xl font-bold mb-4'>{$state}</h1>")
                             ->html()
                             ->columnSpanFull(),
                         TextEntry::make('metadata')
                             ->label('')
                             ->getStateUsing(function ($record) {
                                 $locale = app()->getLocale();
-                                $category = $record->category ? $record->category->getTranslation('name', $locale) : 'No category';
-                                $author = $record->user ? $record->user->name : 'Unknown';
-                                $date = $record->created_at ? $record->created_at->format('M j, Y') : 'N/A';
-                                return "Posted in {$category} by {$author} on {$date}";
+                                $category = $record->category ? $record->category->getTranslation('name', $locale) : __('filament::no_category');
+                                $author = $record->author ? $record->author->name : __('filament::unknown');
+                                $date = $record->created_at ? $record->created_at->format('M j, Y') : __('filament::n_a');
+                                return __('filament.posted_in_by_on', [
+                                    'category' => $category,
+                                    'author' => $author,
+                                    'date' => $date
+                                ]);
                             })
-                            ->formatStateUsing(fn ($state) => "<p class='text-gray-600 italic mb-6'>{$state}</p>")
+                            ->formatStateUsing(fn($state) => "<p class='text-gray-600 italic mb-6'>{$state}</p>")
                             ->html()
                             ->columnSpanFull(),
                         TextEntry::make('content')
@@ -67,49 +66,49 @@ class ViewNews extends ViewRecord
                     ])
                     ->extraAttributes(['class' => 'bg-white p-8 rounded-lg shadow-sm mb-6']),
 
-                Section::make('Article Metadata')
+                Section::make(__('filament::article_metadata'))
                     ->schema([
-                        Section::make('SEO Details')
+                        Section::make(__('filament::seo_details'))
                             ->schema([
                                 TextEntry::make('meta_title')
-                                    ->label('Meta Title')
+                                    ->label(__('filament::meta_title'))
                                     ->color('gray'),
                                 TextEntry::make('meta_description')
-                                    ->label('Meta Description')
+                                    ->label(__('filament::meta_description'))
                                     ->color('gray'),
                                 TextEntry::make('slug')
-                                    ->label('Slug')
+                                    ->label(__('filament::slug'))
                                     ->color('gray'),
                             ])
                             ->columns(1)
                             ->collapsible(),
-                        Section::make('Publication Settings')
+                        Section::make(__('filament::publication_settings'))
                             ->schema([
                                 IconEntry::make('status')
-                                    ->label('Published')
+                                    ->label(__('filament::published'))
                                     ->boolean()
                                     ->trueIcon('heroicon-o-check-circle')
                                     ->falseIcon('heroicon-o-x-circle')
                                     ->trueColor('success')
                                     ->falseColor('danger'),
                                 IconEntry::make('is_breaking_news')
-                                    ->label('Breaking News')
+                                    ->label(__('filament::breaking_news'))
                                     ->boolean()
                                     ->trueIcon('heroicon-o-fire')
                                     ->falseIcon('heroicon-o-x-circle')
                                     ->trueColor('warning'),
                                 IconEntry::make('show_at_slider')
-                                    ->label('Show in Slider')
+                                    ->label(__('filament::show_in_slider'))
                                     ->boolean()
                                     ->trueIcon('heroicon-o-view-columns')
                                     ->falseIcon('heroicon-o-x-circle'),
                                 IconEntry::make('show_at_popular')
-                                    ->label('Show in Popular')
+                                    ->label(__('filament::show_in_popular'))
                                     ->boolean()
                                     ->trueIcon('heroicon-o-star')
                                     ->falseIcon('heroicon-o-x-circle'),
                                 IconEntry::make('is_approved')
-                                    ->label('Approved')
+                                    ->label(__('filament::approved'))
                                     ->boolean()
                                     ->trueIcon('heroicon-o-shield-check')
                                     ->falseIcon('heroicon-o-x-circle')
@@ -117,16 +116,16 @@ class ViewNews extends ViewRecord
                             ])
                             ->columns(5)
                             ->collapsible(),
-                        Section::make('Timestamps')
+                        Section::make(__('filament::timestamps'))
                             ->schema([
                                 TextEntry::make('created_at')
-                                    ->label('Created At')
+                                    ->label(__('filament::created_at'))
                                     ->dateTime('M j, Y H:i')
-                                    ->default('N/A'),
+                                    ->default(__('filament::n_a')),
                                 TextEntry::make('updated_at')
-                                    ->label('Updated At')
+                                    ->label(__('filament::updated_at'))
                                     ->dateTime('M j, Y H:i')
-                                    ->default('N/A'),
+                                    ->default(__('filament::n_a')),
                             ])
                             ->columns(2)
                             ->collapsible(),
@@ -139,7 +138,6 @@ class ViewNews extends ViewRecord
             ->columns(1);
     }
 
-    // Listen for locale changes and refresh the page
     public function setActiveLocale($locale)
     {
         $this->activeLocale = $locale;
@@ -147,9 +145,20 @@ class ViewNews extends ViewRecord
         $this->refreshForm();
     }
 
-    // Ensure the form refreshes when locale changes
+    // Listen for locale changes and refresh the page
+
     protected function refreshForm()
     {
         $this->fillForm();
+    }
+
+    // Ensure the form refreshes when locale changes
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\LocaleSwitcher::make(),
+            Actions\EditAction::make(),
+        ];
     }
 }

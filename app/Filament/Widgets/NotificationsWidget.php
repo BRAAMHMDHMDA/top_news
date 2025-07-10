@@ -23,22 +23,22 @@ class NotificationsWidget extends BaseWidget
         $newSubscribers = Subscriber::whereDate('created_at', today())->count();
 
         return [
-            Stat::make('New Comments', $newComments)
-                ->description('Awaiting moderation')
+            Stat::make(__('filament::new_comments'), $newComments)
+                ->description(__('filament::awaiting_moderation'))
                 ->descriptionIcon('heroicon-o-chat-bubble-left-ellipsis')
                 ->color($newComments > 0 ? 'warning' : 'success')
                 ->url(route('filament.admin.resources.comments.index') . '?tableFilters[status][value]=0')
                 ->extraAttributes(['class' => 'cursor-pointer']),
 
-            Stat::make('New Contacts', $newContacts)
-                ->description('Unread messages')
+            Stat::make(__('filament::new_contacts'), $newContacts)
+                ->description(__('filament::unread_messages'))
                 ->descriptionIcon('heroicon-o-envelope')
                 ->color($newContacts > 0 ? 'warning' : 'success')
                 ->url(route('filament.admin.resources.contacts.index') . '?tableFilters[is_read][value]=0')
                 ->extraAttributes(['class' => 'cursor-pointer']),
 
-            Stat::make('New Subscribers', $newSubscribers)
-                ->description('Today')
+            Stat::make(__('filament::new_subscribers'), $newSubscribers)
+                ->description(__('filament::today'))
                 ->descriptionIcon('heroicon-o-user-plus')
                 ->color('success')
                 ->url(route('filament.admin.resources.subscribers.index'))

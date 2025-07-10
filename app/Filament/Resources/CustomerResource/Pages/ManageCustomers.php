@@ -10,10 +10,17 @@ class ManageCustomers extends ManageRecords
 {
     protected static string $resource = CustomerResource::class;
 
+    public function getTitle(): string
+    {
+        return __('filament::customers');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label(__('filament::create_customer'))
+                ->modalHeading(__('filament::create_customer')),
         ];
     }
 }

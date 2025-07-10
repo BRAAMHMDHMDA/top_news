@@ -17,8 +17,17 @@ class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
-    protected static ?string $navigationGroup = 'General';
     protected static ?int $navigationSort = 1;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('filament::contacts');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament::general');
+    }
 
     public static function canCreate(): bool
     {
@@ -30,29 +39,35 @@ class ContactResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('email')
+                    ->label(__('filament::email'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('subject')
+                    ->label(__('filament::subject'))
                     ->searchable(),
-                Tables\Columns\ToggleColumn::make('is_read'),
+                Tables\Columns\ToggleColumn::make('is_read')
+                    ->label(__('filament::is_read')),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament::created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament::updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('is_read')
-                    ->label('Read?')
+                    ->label(__('filament::is_read'))
                     ->options([
-                        1 => 'Read',
-                        0 => 'Unread',
+                        1 => __('filament::read'),
+                        0 => __('filament::unread'),
                     ]),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
+                    ->modalHeading(__('filament::view_contact'))
                     ->mutateRecordDataUsing(function (array $data): array {
                         Contact::where('id', $data['id'])->update(['is_read' => true]);
                         $data['is_read'] = true;
@@ -60,47 +75,48 @@ class ContactResource extends Resource
                     })
                     ->extraModalFooterActions([
                         Tables\Actions\Action::make('reply')
-                            ->label('Reply')
+                            ->label(__('filament::reply'))
                             ->icon('heroicon-m-arrow-uturn-left')
                             ->form([
                                 Forms\Components\RichEditor::make('reply_message')
                                     ->required()
-                                    ->label('Reply Message'),
+                                    ->label(__('filament::reply_message')),
                             ])
                             ->action(function (array $data, Contact $record) {
-                                Mail::to($record->email)->send(new ReplyContact('Reply to: ' . $record->subject, $data['reply_message']));
+                                Mail::to($record->email)->send(new ReplyContact(__('filament::reply_to') . $record->subject, $data['reply_message']));
                                 Notification::make()
                                     ->success()
-                                    ->title('Reply sent successfully')
+                                    ->title(__('filament::reply_sent'))
                                     ->send();
                             })
                             ->modalHeading(function ($record) {
-                                return 'Reply to: ' . $record->subject;
+                                return __('filament::reply_to') . $record->subject;
                             })
-                            ->modalSubmitActionLabel('Send')
+                            ->modalSubmitActionLabel(__('filament::send'))
                             ->closeModalByClickingAway(false),
                     ]),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->modalHeading(__('filament::delete_contact')),
                 Tables\Actions\Action::make('reply')
-                    ->label('Reply')
+                    ->label(__('filament::reply'))
                     ->icon('heroicon-m-arrow-uturn-left')
                     ->form([
                         Forms\Components\RichEditor::make('reply_message')
                             ->required()
-                            ->label('Reply Message'),
+                            ->label(__('filament::reply_message')),
                     ])
                     ->action(function (array $data, Contact $record) {
 
-                        Mail::to($record->email)->send(new ReplyContact('Reply to: ' . $record->subject, $data['reply_message']));
+                        Mail::to($record->email)->send(new ReplyContact(__('filament::reply_to') . $record->subject, $data['reply_message']));
                         Notification::make()
                             ->success()
-                            ->title('Reply sent successfully')
+                            ->title(__('filament::reply_sent'))
                             ->send();
                     })
                     ->modalHeading(function ($record) {
-                        return 'Reply to: ' . $record->subject;
+                        return __('filament::reply_to') . $record->subject;
                     })
-                    ->modalSubmitActionLabel('Send')
+                    ->modalSubmitActionLabel(__('filament::send'))
                     ->closeModalByClickingAway(false),
             ])
             ->bulkActions([
@@ -119,19 +135,22 @@ class ContactResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('email')
+                    ->label(__('filament::email'))
                     ->email()
                     ->required()
                     ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('subject')
+                    ->label(__('filament::subject'))
                     ->required()
                     ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('message')
+                    ->label(__('filament::message'))
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\DateTimePicker::make('created_at')
-                    ->label('Created At')
+                    ->label(__('filament::created_at'))
                     ->disabled()
                     ->columnSpanFull(),
             ]);

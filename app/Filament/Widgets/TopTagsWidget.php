@@ -16,6 +16,10 @@ class TopTagsWidget extends BaseWidget
     protected static ?int $sort = 5;
     protected int|string|array $columnSpan = '1/2';
 
+    protected function getTableHeading(): ?string
+    {
+        return __('filament::top_tags');
+    }
 
     protected function getTableQuery(): Builder
     {
@@ -29,9 +33,9 @@ class TopTagsWidget extends BaseWidget
     {
         return [
             TextColumn::make('name')
-                ->label('Tag'),
+                ->label(__('filament::tag')),
             TextColumn::make('news_count')
-                ->label('Usage Count'),
+                ->label(__('filament::usage_count')),
         ];
     }
 

@@ -12,10 +12,17 @@ class ListNews extends ListRecords
 
     protected static string $resource = NewsResource::class;
 
+    public function getTitle(): string
+    {
+        return __('filament::news');
+    }
+    
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label(__('filament::create_news')),
             Actions\LocaleSwitcher::make(),
         ];
     }

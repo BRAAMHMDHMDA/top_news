@@ -14,8 +14,12 @@ class TopNewsByViewsWidget extends BaseWidget
     use HasWidgetShield;
 
     protected static ?int $sort = 2;
-
     protected int|string|array $columnSpan = 'full';
+
+    protected function getTableHeading(): ?string
+    {
+        return __('filament::top_news_by_views');
+    }
 
     protected function getTableQuery(): Builder
     {
@@ -34,13 +38,14 @@ class TopNewsByViewsWidget extends BaseWidget
     {
         return [
             TextColumn::make('title')
-                ->label('Title'),
+                ->label(__('filament::title')),
 
             TextColumn::make('views')
-                ->label('Views'),
+                ->label(__('filament::views')),
 
             TextColumn::make('created_at')
                 ->since()
+                ->label(__('filament::created_at'))
                 ->dateTimeTooltip() // shows the full timestamp in a tooltip,
         ];
     }

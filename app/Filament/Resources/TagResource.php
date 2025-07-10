@@ -17,20 +17,26 @@ class TagResource extends Resource
     protected static ?string $model = Tag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-        protected static ?string $navigationGroup = 'News';
-        // navigation Group first group
-
-
     protected static ?int $navigationSort = 2;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('filament::tags');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament::news');
+    }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                    ->label(__('filament::name')),
                 TextColumn::make('news_count')
-                    ->label('News Count')
+                    ->label(__('filament::news_count'))
                     ->counts('news'),
             ])
             ->filters([
@@ -38,15 +44,16 @@ class TagResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make()
-                    ->label('View Linked News')
+                    ->label(__('filament::view_linked_news'))
                     ->url(function ($record) {
                         return route('filament.admin.resources.news.index', ['tableFilters[tags][values][0]' => $record->id]);
                     }),
-                ])
+            ])
             ->bulkActions([
                 //
             ]);
     }
+
     public static function canCreate(): bool
     {
         return false;
@@ -56,8 +63,10 @@ class TagResource extends Resource
     {
         return $infolist
             ->schema([
-                TextEntry::make('name'),
+                TextEntry::make('name')
+                    ->label(__('filament::name')),
                 ViewEntry::make('news')
+                    ->label(__('filament::news'))
                     ->view('filament.resources.tag-resource.infolists.components.news-list'),
             ]);
     }

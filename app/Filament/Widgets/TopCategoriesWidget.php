@@ -21,6 +21,11 @@ class TopCategoriesWidget extends BaseWidget
         return 4;
     }
 
+    protected function getTableHeading(): ?string
+    {
+        return __('filament::top_categories');
+    }
+
     protected function getTableQuery(): Builder
     {
         return Category::query()
@@ -33,10 +38,10 @@ class TopCategoriesWidget extends BaseWidget
     {
         return [
             TextColumn::make('name')
-                ->label('Category'),
+                ->label(__('filament::category')),
 
             TextColumn::make('news_count')
-                ->label('Number of News'),
+                ->label(__('filament::number_of_news')),
         ];
     }
 

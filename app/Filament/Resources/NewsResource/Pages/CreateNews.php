@@ -12,6 +12,11 @@ class CreateNews extends CreateRecord
 
     protected static string $resource = NewsResource::class;
 
+    public function getTitle(): string
+    {
+        return __('filament::create_news');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -8,10 +8,10 @@
                     <ul class="breadcrumbs bg-light mb-4">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('home') }}" class="breadcrumbs__url">
-                                <i class="fa fa-home"></i> Home</a>
+                                <i class="fa fa-home"></i> {{ __('website.home') }}</a>
                         </li>
                         <li class="breadcrumbs__item breadcrumbs__item--current">
-                            Contact Us
+                            {{ __('website.contact') }}
                         </li>
                     </ul>
                     <!-- End breadcrumb -->
@@ -27,7 +27,7 @@
         <form class="container" wire:submit.prevent="submit">
             <div class="row">
                 <div class="col-md-8">
-                    <h5>contact us</h5>
+                    <h5>{{ __('website.contact') }}</h5>
                     @session('contact_success')
                     <div class="alert alert-success"> {{ __('website.contact_success') }} </div>
                     @endsession
@@ -36,17 +36,17 @@
                             <div class="form-group form-group-name">
                                 {{--                                <label> <span class="required"></span></label>--}}
                                 {{--                                <input  class="form-control" name="email" required="">--}}
-                                <x-input name="email" type="email" label="Your email" required/>
+                                <x-input name="email" type="email" label="{{ __('website.email') }}" required/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group form-group-name">
-                                <x-input name="subject" type="text" label="Subject" required/>
+                                <x-input name="subject" type="text" label="{{ __('website.subject') }}" required/>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Your Message</label>
+                                <label>{{ __('website.message') }}</label>
                                 <textarea class="form-control @error('message') is-invalid @enderror" rows="8"
                                           name="message" wire:model="message"></textarea>
                                 @error('message')
@@ -56,14 +56,14 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-4">
-                                <x-submit-btn class="btn btn-primary">Submit</x-submit-btn>
+                                <x-submit-btn class="btn btn-primary">{{__('website.submit')}}</x-submit-btn>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <h5>Info location</h5>
+                    <h5>{{ __('website.info_location') }}</h5>
                     <div class="wrap__contact-form-office">
                         <ul class="list-unstyled">
                             <li>
@@ -89,7 +89,7 @@
                         </ul>
 
                         <div class="social__media">
-                            <h5>find us</h5>
+                            <h5>{{ __('website.find_us') }}</h5>
                             <ul class="list-inline">
 
                                 <li class="list-inline-item">

@@ -6,10 +6,10 @@
                 <ul class="breadcrumbs bg-light mb-4">
                     <li class="breadcrumbs__item">
                         <a href="{{ route('home') }}" class="breadcrumbs__url">
-                            <i class="fa fa-home"></i> Home</a>
+                            <i class="fa fa-home"></i> {{ __('website.home') }}</a>
                     </li>
                     <li class="breadcrumbs__item breadcrumbs__item--current">
-                        About Us
+                        {{ __('website.about') }}
                     </li>
                 </ul>
                 <!-- End breadcrumb -->

@@ -15,8 +15,17 @@ class AdResource extends Resource
     protected static ?string $model = Ad::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
-    protected static ?string $navigationGroup = 'General';
     protected static ?int $navigationSort = 3;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('filament::ads');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament::general');
+    }
 
     public static function form(Form $form): Form
     {
@@ -24,29 +33,33 @@ class AdResource extends Resource
             ->schema([
                 // select input position
                 Forms\Components\Select::make('position')
+                    ->label(__('filament::position'))
                     ->options([
-                        Ad::HOME_TOP => ucwords(str_replace('_', ' ', Ad::HOME_TOP)),
-                        Ad::HOME_MIDDLE => ucwords(str_replace('_', ' ', Ad::HOME_MIDDLE)),
-                        Ad::NEWS_PAGE => ucwords(str_replace('_', ' ', Ad::NEWS_PAGE)),
-                        Ad::VIEW_PAGE => ucwords(str_replace('_', ' ', Ad::VIEW_PAGE)),
-                        Ad::SIDE_BAR => ucwords(str_replace('_', ' ', Ad::SIDE_BAR)),
+                        Ad::HOME_TOP => Ad::HOME_TOP,
+                        Ad::HOME_MIDDLE => Ad::HOME_MIDDLE,
+                        Ad::NEWS_PAGE => Ad::NEWS_PAGE,
+                        Ad::VIEW_PAGE => Ad::VIEW_PAGE,
+                        Ad::SIDE_BAR => Ad::SIDE_BAR,
                     ])
                     ->required(),
 
                 Forms\Components\TextInput::make('url')
+                    ->label(__('filament::url'))
                     ->url()
                     ->required()
                     ->maxLength(255),
 
                 Forms\Components\FileUpload::make('image_path')
+                    ->label(__('filament::image'))
                     ->image()
                     ->required(),
 
                 // bool active or draft
                 Forms\Components\Radio::make('status')
+                    ->label(__('filament::status'))
                     ->options([
-                        Ad::STATUS_ACTIVE => 'Active',
-                        Ad::STATUS_DRAFT => 'Draft',
+                        Ad::STATUS_ACTIVE => __('filament::statuses.active'),
+                        Ad::STATUS_DRAFT => __('filament::statuses.draft'),
                     ])
                     ->inline()
                     ->inlineLabel(false)
@@ -60,14 +73,17 @@ class AdResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('position')
+                    ->label(__('filament::position'))
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('image_path')
-                    ->label('Image'),
+                    ->label(__('filament::image')),
 
                 Tables\Columns\TextColumn::make('url')
+                    ->label(__('filament::url'))
                     ->searchable(),
 
                 Tables\Columns\IconColumn::make('status')
+                    ->label(__('filament::status'))
                     ->icon(fn(string $state): string => match ($state) {
                         Ad::STATUS_DRAFT => 'heroicon-o-archive-box-x-mark',
                         Ad::STATUS_ACTIVE => 'heroicon-o-check-badge',
@@ -80,10 +96,12 @@ class AdResource extends Resource
                     ->searchable()
                 ,
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament::created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament::updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -92,8 +110,11 @@ class AdResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading(__('filament::edit_ad')),
+                Tables\Actions\DeleteAction::make()
+                    ->modalHeading(__('filament::delete_ad')),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

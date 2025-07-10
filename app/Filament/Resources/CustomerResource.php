@@ -10,31 +10,34 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-
 use Illuminate\Support\Facades\Hash;
 
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
-    public static function getNavigationGroup(): ?string
-    {
-        if (config('filament-users.shield')) {
-            return __('filament-shield::filament-shield.nav.group');
-        }
-
-        return config('filament-users.group') ?: trans('filament-users::user.group');
-    }
     protected static ?int $navigationSort = 1000;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function getNavigationLabel(): string
+    {
+        return __('filament::customers');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament-shield::filament-shield.nav.group');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('filament::name'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
+                    ->label(__('filament::email'))
                     ->email()
                     ->required()
                     ->maxLength(255),
@@ -42,17 +45,17 @@ class CustomerResource extends Resource
                     ->label(__('filament-panels::pages/auth/register.form.password.label'))
                     ->password()
                     ->revealable(filament()->arePasswordsRevealable())
-                    ->required(fn ($record) => ! $record)
+                    ->required(fn($record) => !$record)
                     ->rule(\Illuminate\Validation\Rules\Password::default())
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrated(fn($state) => filled($state))
+                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
                     ->same('passwordConfirmation')
                     ->validationAttribute(__('filament-panels::pages/auth/register.form.password.validation_attribute')),
                 Forms\Components\TextInput::make('passwordConfirmation')
                     ->label(__('filament-panels::pages/auth/register.form.password_confirmation.label'))
                     ->password()
                     ->revealable(filament()->arePasswordsRevealable())
-                    ->required(fn ($record) => ! $record)
+                    ->required(fn($record) => !$record)
                     ->dehydrated(false)
             ]);
     }
@@ -62,14 +65,17 @@ class CustomerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('filament::name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->label(__('filament::email'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
+                    ->label(__('filament::email_verified_at'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('status')
-                    ->label('IsActive')
+                    ->label(__('filament::is_active'))
                     ->afterStateUpdated(function ($record, $state) {
                         Notification::make()
                             ->title('Status Updated')
@@ -78,10 +84,12 @@ class CustomerResource extends Resource
                             ->send();
                     }),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament::created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament::updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -90,9 +98,9 @@ class CustomerResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->modalHeading(__('filament::view_customer')),
+                Tables\Actions\EditAction::make()->modalHeading(__('filament::edit_customer')),
+                Tables\Actions\DeleteAction::make()->modalHeading(__('filament::delete_customer')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

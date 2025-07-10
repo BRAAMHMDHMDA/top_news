@@ -20,13 +20,25 @@ class EditAboutUs extends Page implements HasForms
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static string $view = 'filament.pages.edit-about-us';
-    protected static ?string $title = 'Edit About Us Page';
-    protected static ?string $navigationLabel = 'About Us Page';
-    protected static ?string $navigationGroup = 'General';
     protected static ?int $navigationSort = 4;
-
-
     public ?array $data = [];
+
+    // TITLE
+
+    public static function getNavigationLabel(): string
+    {
+        return __('filament::about_us_page');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament::general');
+    }
+
+    public function getTitle(): string
+    {
+        return __('filament::edit_aboutPage');
+    }
 
     public function mount(): void
     {
@@ -43,7 +55,7 @@ class EditAboutUs extends Page implements HasForms
         return $form
             ->schema([
                 RichEditor::make('content')
-                    ->label('Content')
+                    ->label(__('filament::content'))
                     ->toolbarButtons([
                         'attachFiles',
                         'blockquote',

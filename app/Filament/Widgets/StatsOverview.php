@@ -17,52 +17,27 @@ class StatsOverview extends BaseWidget
 
     protected function getStats(): array
     {
-//        $newComments = Comment::where('status', false)->count();
-//        $newContacts = Contact::where('is_read', false)->count();
-//        $newSubscribers = Subscriber::whereDate('created_at', today())->count();
-
         return [
-            Stat::make('Total Customers', Customer::count())
-                ->description('Number of registered customers')
+            Stat::make(__('filament::total_customers'), Customer::count())
+                ->description(__('filament::number_of_registered_customers'))
                 ->descriptionIcon('heroicon-o-users')
                 ->extraAttributes(['class' => 'cursor-pointer'])
                 ->url(route('filament.admin.resources.customers.index'))
                 ->color('primary'),
 
-            Stat::make('Total News', News::activeEntries()->count())
-                ->description('Number of published news articles')
+            Stat::make(__('filament::total_news'), News::activeEntries()->count())
+                ->description(__('filament::number_of_published_news'))
                 ->descriptionIcon('heroicon-o-newspaper')
                 ->extraAttributes(['class' => 'cursor-pointer'])
                 ->url(route('filament.admin.resources.news.index') . '?tableFilters[status][value]=1&tableFilters[is_approved][value]=1')
                 ->color('primary'),
 
-            Stat::make('Total Subscribers', Subscriber::count())
-                ->description('Number of Subscribers')
+            Stat::make(__('filament::total_subscribers'), Subscriber::count())
+                ->description(__('filament::number_of_subscribers'))
                 ->descriptionIcon('heroicon-o-envelope')
                 ->extraAttributes(['class' => 'cursor-pointer'])
                 ->url(route('filament.admin.resources.subscribers.index'))
                 ->color('primary'),
-
-//            Stat::make('New Comments', $newComments)
-//                ->description('Awaiting moderation')
-//                ->descriptionIcon('heroicon-o-chat-bubble-left-ellipsis')
-//                ->color($newComments > 0 ? 'warning' : 'success')
-//                ->url(route('filament.admin.resources.comments.index') . '?tableFilters[status][value]=0')
-//                ->extraAttributes(['class' => 'cursor-pointer']),
-//
-//            Stat::make('New Contacts', $newContacts)
-//                ->description('Unread messages')
-//                ->descriptionIcon('heroicon-o-envelope')
-//                ->color($newContacts > 0 ? 'warning' : 'success')
-//                ->url(route('filament.admin.resources.contacts.index') . '?tableFilters[is_read][value]=0')
-//                ->extraAttributes(['class' => 'cursor-pointer']),
-//
-//            Stat::make('New Subscribers', $newSubscribers)
-//                ->description('Today')
-//                ->descriptionIcon('heroicon-o-user-plus')
-//                ->color('success')
-//                ->url(route('filament.admin.resources.subscribers.index'))
-//                ->extraAttributes(['class' => 'cursor-pointer']),
         ];
     }
 }

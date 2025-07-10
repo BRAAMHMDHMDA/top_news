@@ -16,6 +16,12 @@ class TopNewsByCommentsWidget extends BaseWidget
     protected static ?int $sort = 3;
     protected int|string|array $columnSpan = 'full';
 
+    protected function getTableHeading(): ?string
+    {
+        return __('filament::top_news_by_comments');
+    }
+
+
     protected function getTableQuery(): Builder
     {
         return News::activeEntries()
@@ -28,13 +34,14 @@ class TopNewsByCommentsWidget extends BaseWidget
     {
         return [
             TextColumn::make('title')
-                ->label('Title'),
+                ->label(__('filament::title')),
 
             TextColumn::make('comments_count')
-                ->label('Comments'),
+                ->label(__('filament::comments')),
 
             TextColumn::make('created_at')
                 ->since()
+                ->label(__('filament::created_at'))
                 ->dateTimeTooltip() // shows the full timestamp in a tooltip,
         ];
     }

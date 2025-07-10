@@ -23,15 +23,24 @@ class CategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'News';
     protected static ?int $navigationSort = 1;
 
+    public static function getNavigationLabel(): string
+    {
+        return __('filament::categories');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament::news');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label(__('filament::name'))
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true) // Trigger update on blur
@@ -45,14 +54,17 @@ class CategoryResource extends Resource
                     }),
 
                 TextInput::make('slug')
+                    ->label(__('filament::slug'))
                     ->required()
                     ->maxLength(255)
                     ->unique(ignoreRecord: true)
                     ->readonly()
                     ->dehydrated(true),
                 Forms\Components\Toggle::make('show_at_nav')
+                    ->label(__('filament::show_in_navigation'))
                     ->required(),
                 Forms\Components\Toggle::make('status')
+                    ->label(__('filament::status'))
                     ->required(),
             ]);
     }
@@ -62,29 +74,35 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('filament::name'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->label(__('filament::slug'))
                     ->searchable(),
                 TextColumn::make('news_count')
-                    ->label('News Count')
+                    ->label(__('filament::news_count'))
                     ->counts('news')
                     ->url(function ($record) {
                         return NewsResource::getUrl('index', [
                             'tableFilters[category][value]' => $record->id,
                         ]);
                     })
-                    ->tooltip('Click to view news articles in this category'),
+                    ->tooltip(__('filament::view_news_articles')),
 
                 Tables\Columns\IconColumn::make('show_at_nav')
+                    ->label(__('filament::show_in_navigation'))
                     ->boolean(),
                 Tables\Columns\IconColumn::make('status')
+                    ->label(__('filament::status'))
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament::created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament::updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -92,24 +110,26 @@ class CategoryResource extends Resource
             ->filters([
                 //show at nav
                 Tables\Filters\SelectFilter::make('show_at_nav')
-                    ->label('Show at Navigation')
+                    ->label(__('filament::show_in_navigation'))
                     ->options([
-                        '1' => 'Shown in Navigation',
-                        '0' => 'Not Shown in Navigation',
+                        '1' => __('filament::shown_in_navigation'),
+                        '0' => __('filament::not_shown_in_navigation'),
                     ])
-                    ->placeholder('All Categories'),
+                    ->placeholder(__('filament::all')),
                 Tables\Filters\SelectFilter::make('status')
-                    ->label('Status')
+                    ->label(__('filament::status'))
                     ->options([
-                        '1' => 'Active',
-                        '0' => 'Inactive',
+                        '1' => __('filament::active'),
+                        '0' => __('filament::inactive'),
                     ])
-                    ->placeholder('All Statuses'),
+                    ->placeholder(__('filament::all')),
 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->modalHeading(__('filament::edit_category')),
+                Tables\Actions\DeleteAction::make()
+                    ->modalHeading(__('filament::delete_category')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

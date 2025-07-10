@@ -31,7 +31,7 @@ class TranslationResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return config('filament-translations.languages-switcher-menu.group', trans('filament-translations::translation.group'));
+        return __('filament::settings');
     }
 
     public static function getNavigationIcon(): string
@@ -42,11 +42,6 @@ class TranslationResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         return config('filament-translations.register_navigation', true);
-    }
-
-    public function getTitle(): string
-    {
-        return trans('filament-translations::translation.title.home');
     }
 
     public static function form(Form $form): Form
@@ -72,5 +67,10 @@ class TranslationResource extends Resource
                 'edit' => \TomatoPHP\FilamentTranslations\Filament\Resources\TranslationResource\Pages\EditTranslation::route('/{record}/edit'),
             ];
         }
+    }
+
+    public function getTitle(): string
+    {
+        return trans('filament-translations::translation.title.home');
     }
 }

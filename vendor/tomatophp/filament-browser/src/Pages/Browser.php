@@ -2,16 +2,15 @@
 
 namespace TomatoPHP\FilamentBrowser\Pages;
 
+use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 use Creagia\FilamentCodeField\CodeField;
 use Filament\Actions\Action;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
-use Filament\Infolists\Components\Actions;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -19,13 +18,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Livewire\Attributes\On;
 use TomatoPHP\FilamentBrowser\Models\Files;
-use TomatoPHP\FilamentDeveloperGate\Traits\DeveloperGateLogoutAction;
 use TomatoPHP\FilamentDeveloperGate\Traits\InteractWithDeveloperGate;
-use BezhanSalleh\FilamentShield\Traits\HasPageShield;
 
 
 class Browser extends Page implements HasTable
@@ -35,7 +31,19 @@ class Browser extends Page implements HasTable
     use HasPageShield;
 
 
+    protected static ?string $navigationIcon = 'heroicon-o-folder';
+    protected static string $view = 'filament-browser::browser';
     public string $language = "php";
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('filament-browser::messages.title');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament::settings');
+    }
 
     #[On('refreshTable')]
     public function refreshTable()
@@ -235,41 +243,6 @@ class Browser extends Page implements HasTable
             ->query(Files::query());
     }
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            Action::make('developer_gate_logout')
-                ->action(function () {
-                    session()->forget('developer_password');
-
-                    Notification::make()
-                        ->title(trans('filament-developer-gate::messages.notifications.logout.title'))
-                        ->body(trans('filament-developer-gate::messages.notifications.logout.body'))
-                        ->success()
-                        ->send();
-
-                    return redirect()->to(config('filament-developer-gate.route_prefix') . '/developer-gate');
-                })
-                ->requiresConfirmation()
-                ->color('danger')
-                ->label(trans('filament-developer-gate::messages.logout'))
-        ];
-    }
-
-    protected static ?string $navigationIcon = 'heroicon-o-folder';
-
-    protected static string $view = 'filament-browser::browser';
-
-    public static function getNavigationLabel(): string
-    {
-        return trans('filament-browser::messages.title');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return trans('filament-browser::messages.group');
-    }
-
     public function getTitle(): string
     {
         return trans('filament-browser::messages.title');
@@ -298,6 +271,21 @@ class Browser extends Page implements HasTable
             ->fillForm(function (array $arguments) {
                 return [
                     'content' => (str($arguments['file']['extension'])->contains([
+                            "php",
+                            "json",
+                            "js",
+                            "yaml",
+                            "xml",
+                            "lock",
+                            "txt",
+                            "html",
+                            "log",
+                            "md",
+                        ]) || str($arguments['file']['name'])->contains(['.env', '.git', '.editor']) || empty($arguments['file']['extension'])) ? File::get($arguments['file']['path']) : $arguments['file'],
+                ];
+            })
+            ->form(function (array $arguments) {
+                return ((str($arguments['file']['extension'])->contains([
                         "php",
                         "json",
                         "js",
@@ -307,22 +295,7 @@ class Browser extends Page implements HasTable
                         "txt",
                         "html",
                         "log",
-                        "md",
-                    ]) || str($arguments['file']['name'])->contains(['.env', '.git', '.editor']) || empty($arguments['file']['extension'])) ? File::get($arguments['file']['path']) : $arguments['file'],
-                ];
-            })
-            ->form(function (array $arguments) {
-                return ((str($arguments['file']['extension'])->contains([
-                    "php",
-                    "json",
-                    "js",
-                    "yaml",
-                    "xml",
-                    "lock",
-                    "txt",
-                    "html",
-                    "log",
-                ]) || str($arguments['file']['name'])->contains(['.env', '.git', '.editor']) || empty($arguments['file']['extension'])) ? [
+                    ]) || str($arguments['file']['name'])->contains(['.env', '.git', '.editor']) || empty($arguments['file']['extension'])) ? [
                     CodeField::make('content')
                         ->disabled(fn() => !filament('filament-browser')->allowEditFile)
                         ->label(trans('filament-browser::messages.edit.content'))
@@ -422,5 +395,26 @@ class Browser extends Page implements HasTable
                 }
             })
             ->view('filament-browser::actions.file', ['file' => $file]);
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('developer_gate_logout')
+                ->action(function () {
+                    session()->forget('developer_password');
+
+                    Notification::make()
+                        ->title(trans('filament-developer-gate::messages.notifications.logout.title'))
+                        ->body(trans('filament-developer-gate::messages.notifications.logout.body'))
+                        ->success()
+                        ->send();
+
+                    return redirect()->to(config('filament-developer-gate.route_prefix') . '/developer-gate');
+                })
+                ->requiresConfirmation()
+                ->color('danger')
+                ->label(trans('filament-developer-gate::messages.logout'))
+        ];
     }
 }

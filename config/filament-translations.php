@@ -41,7 +41,7 @@ return [
         ],
         'ar' => [
             'label' => 'Arabic',
-            'flag' => 'eg',
+            'flag' => 'sa',
         ],
     ],
 

@@ -13,7 +13,7 @@ return [
     'profile_information' => 'Profile Information',
     'update_your_profile' => 'Update your account\'s profile information and email address.',
     'update_password_description' => 'Ensure your account is using a long, random password to stay secure.',
-    
+
     // Authentication
     'forgot_password' => 'Forgot Password',
     'forgot_password_help' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',
@@ -26,7 +26,6 @@ return [
     'logout' => 'Logout',
     'email' => 'Email',
     'password' => 'Password',
-    'confirm_password' => 'Confirm Password',
     'name' => 'Name',
     'already_registered' => 'Already registered?',
     'no_account' => 'Don\'t have an account?',

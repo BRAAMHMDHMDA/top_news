@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use App\Filament\Resources\CommentResource;
-use Filament\Notifications\Actions\Action;
-use Filament\Notifications\Notification;
+use App\Notifications\NewComment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class Comment extends Model
 {
@@ -23,19 +22,8 @@ class Comment extends Model
         });
 
         static::created(function ($comment) {
-            $admins = \App\Models\User::role('super_admin')->get();
-            Notification::make()
-                ->title('New Comment')
-                ->warning()
-                ->body("{$comment->customer->name} has commented on {$comment->news->title}")
-                ->icon('heroicon-o-chat-bubble-left-right')
-                ->actions([
-                    Action::make('Go to Comments')
-                        ->button()
-                        ->url(CommentResource::getUrl('index')) // adapt to your route
-                        ->close(),
-                ])
-                ->sendToDatabase($admins);
+            $admins = User::permission('view_contact')->get();
+            Notification::send($admins, new NewComment($comment));
         });
     }
 

@@ -17,8 +17,11 @@ class Settings extends BaseSettings
 //    protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
     use HasPageShield;
 
-    protected static ?string $navigationGroup = 'Settings';
-    protected static ?int $navigationSort = -4;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament::settings');
+    }
 
     public function schema(): array|Closure
     {

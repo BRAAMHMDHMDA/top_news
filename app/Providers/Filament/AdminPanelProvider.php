@@ -99,10 +99,10 @@ class AdminPanelProvider extends PanelProvider
             ->topNavigation(false)
             ->globalSearch(false)
             ->navigationGroups([
-                'News',
-                'General',
-                'Users',
-                'Settings',
+                __('filament::news'),
+                __('filament::general'),
+                __('filament-shield::filament-shield.nav.group'),
+                __('filament::settings'),
             ])
             ->plugin(
                 BreezyCore::make()

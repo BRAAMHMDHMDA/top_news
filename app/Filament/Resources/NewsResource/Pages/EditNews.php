@@ -12,6 +12,11 @@ class EditNews extends EditRecord
 
     protected static string $resource = NewsResource::class;
 
+    public function getTitle(): string
+    {
+        return __('filament::edit_news');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

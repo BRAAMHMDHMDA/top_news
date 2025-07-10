@@ -11,25 +11,33 @@ class ManageTags extends ManageRecords
 {
     protected static string $resource = TagResource::class;
 
+    public function getTitle(): string
+    {
+        return __('filament::tags');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label(__('filament::create')),
             Actions\Action::make('delete_unused_tags')
-                ->label('Delete Unused Tags')
+                ->label(__('filament::delete_unused_tags'))
                 ->icon('heroicon-o-trash')
                 ->color('danger')
                 ->action(function () {
                     $deletedCount = Tag::doesntHave('news')->delete();
                     \Filament\Notifications\Notification::make()
-                        ->title($deletedCount > 0 ? "Deleted {$deletedCount} unused tags." : 'No unused tags found.')
+                        ->title($deletedCount > 0
+                            ? __('filament::deleted_count_unused_tags', ['count' => $deletedCount])
+                            : __('filament::no_unused_tags_found'))
                         ->status($deletedCount > 0 ? 'success' : 'warning')
                         ->send();
                 })
                 ->requiresConfirmation()
-                ->modalHeading('Delete Unused Tags')
-                ->modalDescription('Are you sure you want to delete all tags not associated with any news? This cannot be undone.')
-                ->modalSubmitActionLabel('Yes, delete them'),
+                ->modalHeading(__('filament::delete_unused_tags'))
+                ->modalDescription(__('filament::confirm_delete_unused_tags_description'))
+                ->modalSubmitActionLabel(__('filament::yes_delete_them')),
         ];
     }
 }
