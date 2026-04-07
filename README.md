@@ -1,66 +1,179 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center" style="font-size: 4rem; letter-spacing: 0.1em; margin-bottom: 0;">
+    TOP<span style="color: #00a8ff;">NEWS</span> App
+</h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About _Top News_
 
-## About Laravel
+**Top News** is a global news website I fully developed from scratch. It delivers constantly updated news across multiple categories and supports both **Arabic and English** to serve a wide international audience.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Table of Contents / فهرس المحتويات
+- [Top News App](#top-news-app) / [تطبيق Top News](#تطبيق-top-news)
+  - [The Website](#the-website) / [الموقع](#الموقع)
+  - [Dashboard](#dashboard) / [لوحة-التحكم](#لوحة-التحكم)
+  - [Tools and Technologies](#tools-and-technologies) / [الأدوات-والتقنيات](#الأدوات-والتقنيات)
+  - [Future Features](#future-features) / [المميزات-المستقبلية](#المميزات-المستقبلية)
+  - [Contact Us](#contact-us) / [تواصلوا-معنا](#تواصلوا-معنا)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+# Top News App
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Top News** is a modern global news platform built to deliver fresh, reliable, and well-organized content across multiple categories. It provides a smooth bilingual experience in **Arabic** and **English**, making it suitable for a broad international audience.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## The Website
 
-## Laravel Sponsors
+Top News offers a professional news browsing experience with the following features:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Wide News Coverage**: Browse news across multiple categories and topics.
+- **Bilingual Support**: Full support for both Arabic and English with a seamless user experience.
+- **Responsive Design**: Works smoothly on all devices including mobile, tablet, and desktop.
+- **Latest and Most Read News**: Highlight trending and most visited articles.
+- **Modern UI/UX**: Clean and professional design built for news platforms.
+- **Fast Search**: Quickly find news articles and posts.
+- **Newsletter Subscription**: Users can subscribe to receive updates.
+- **Social Media Integration**: Stay connected through social platforms.
+- **Contact Form**: Easily send messages to the website team.
+- **Authentication System**: Simple login and registration with Google login support.
+- **Comments System**: Users can comment on news articles.
+- **Social Sharing**: Share any news article instantly on social media.
+- **View Counter**: Track the number of views for each article.
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Dashboard
 
-## Contributing
+The Top News dashboard provides a powerful admin panel for managing the entire platform efficiently:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Content Management
+- Manage articles, categories, and comments.
+- Publish, edit, and delete content easily.
+- Support bilingual content management from one unified dashboard.
 
-## Code of Conduct
+### User Management
+- Manage user accounts and roles.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### General Settings
+- **Contacts** — View and manage incoming visitor messages.
+- **Newsletter** — Manage newsletter subscribers.
+- **Ads** — Control advertisements displayed on the website.
+- **Social Counts** — Manage social media follower counts.
+- **About Us** — Fully customize the "About Us" page.
+- **File Management** — Browse and manage all server files.
+- **Translations** — Full control over any translation in the application.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Tools and Technologies
 
-## License
+Top News is built with modern and powerful technologies:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Back-End**: Laravel
+- **Admin Panel**: FilamentPHP
+- **Real-Time Features**: Livewire, Pusher
+- **Database**: MySQL
+- **Front-End**: Bootstrap, HTML, CSS
+
+---
+
+## Future Features
+
+We are continuously improving Top News with future enhancements such as:
+
+- Personalized news recommendations
+- Advanced search and filtering
+- Push notifications for breaking news
+- Enhanced analytics for article performance
+- More social login options
+- Improved editorial workflow
+
+Top News is designed to deliver a fast, modern, and multilingual news experience for readers and administrators alike.
+
+---
+
+### Contact Us
+For inquiries, feedback, or support, feel free to contact the project team.
+
+---
+
+# تطبيق Top News
+
+**Top News** هو موقع ويب إخباري عالمي طوّرته بالكامل من الصفر. يقدم أخبارًا محدّثة باستمرار عبر تصنيفات متعددة، ويدعم **اللغتين العربية والإنجليزية** ليخدم جمهورًا دوليًا واسعًا.
+
+---
+
+## الموقع
+
+يوفر موقع Top News تجربة تصفح إخبارية احترافية مع الميزات التالية:
+
+- **تغطية إخبارية شاملة** موزعة على تصنيفات متعددة.
+- **دعم كامل للغتين العربية والإنجليزية** مع تجربة مستخدم سلسة.
+- **تصميم متجاوب** يعمل على جميع الأجهزة مثل الموبايل والتابلت والديسكتوب.
+- **عرض الأخبار الأحدث والأكثر قراءة**.
+- **واجهة عصرية واحترافية** تناسب المنصات الإخبارية.
+- **بحث سريع وسلس** عن الأخبار والمقالات.
+- **إمكانية الاشتراك في النشرة البريدية**.
+- **تكامل مع منصات التواصل الاجتماعي**.
+- **نموذج تواصل مباشر** مع فريق الموقع.
+- **نظام تسجيل دخول وإنشاء حساب** بسهولة مع دعم Google Login.
+- **إمكانية التعليق على الأخبار والمقالات**.
+- **مشاركة الأخبار والمقالات** على وسائل التواصل الاجتماعي بنقرة واحدة.
+- **عداد مشاهدات** لكل خبر أو مقالة.
+
+---
+
+## لوحة التحكم
+
+توفر لوحة التحكم في Top News أدوات قوية لإدارة الموقع بكفاءة:
+
+### إدارة المحتوى
+- إدارة المقالات والتصنيفات والتعليقات.
+- نشر المحتوى وتعديله وحذفه بسهولة.
+- دعم المحتوى ثنائي اللغة من لوحة تحكم موحّدة.
+
+### إدارة المستخدمين
+- إدارة حسابات المستخدمين والصلاحيات.
+
+### الإعدادات العامة
+- **Contacts** — استعراض وإدارة رسائل الزوار الواردة.
+- **Newsletter** — إدارة المشتركين في النشرة البريدية.
+- **ADs** — التحكم في الإعلانات المعروضة على الموقع.
+- **Social Counts** — إدارة أعداد المتابعين على منصات التواصل.
+- **About Us** — تخصيص صفحة "من نحن" بشكل كامل.
+- **File Management** — إدارة وتصفح كافة الملفات على السيرفر.
+- **Translations** — التحكم الكامل في الترجمات لأي كلمة داخل التطبيق.
+
+---
+
+## الأدوات والتقنيات
+
+تم بناء Top News باستخدام تقنيات حديثة وقوية:
+
+- **الخلفية**: Laravel
+- **لوحة الإدارة**: FilamentPHP
+- **الخصائص اللحظية**: Livewire، Pusher
+- **قاعدة البيانات**: MySQL
+- **الواجهة الأمامية**: Bootstrap، HTML، CSS
+
+---
+
+## المميزات المستقبلية
+
+نواصل تطوير Top News بإضافة مزايا مستقبلية مثل:
+
+- توصيات أخبار مخصصة
+- بحث متقدم وتصفية أفضل
+- إشعارات فورية للأخبار العاجلة
+- تحليلات أكثر تقدمًا لأداء المقالات
+- المزيد من خيارات تسجيل الدخول الاجتماعي
+- تحسينات على سير العمل التحريري
+
+تم تصميم Top News ليقدم تجربة إخبارية سريعة، عصرية، ومتعددة اللغات للقراء والمديرين على حد سواء.
+
+---
+
+### تواصلوا معنا
+للاستفسارات أو الملاحظات أو الدعم، يمكنكم التواصل مع فريق المشروع.
